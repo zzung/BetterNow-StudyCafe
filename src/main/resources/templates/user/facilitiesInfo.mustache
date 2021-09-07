@@ -1,0 +1,176 @@
+{{>layout/header}}
+{{>layout/navbar}}
+<body>
+    <!-- services -->
+    <section class="page-section" id="services">
+        <br><br>
+        <div class="container px-4 px-lg-5">
+            <!-- 시설 미리보기 -->
+            <div class="row gx-4 gx-lg-5 justify-content-center" style="height: 750px;">
+                <div class="col-lg-8 col-xl-6 text-center">
+                    <h2 class="mt-0">시설 둘러보기</h2>
+                    <hr class="divider" />
+                </div>
+                <div class="row gx-4 gx-lg-5 justify-content-center mb-5 " style="width: 75%;">
+                    <div id="facilitiesImg" class="carousel slide closerFromTop" data-ride="carousel">
+                        <ul class="carousel-indicators">
+                            <li data-target="#facilitiesImg" data-slide-to="0" class="active"></li>
+                            <li data-target="#facilitiesImg" data-slide-to="1"></li>
+                            <li data-target="#facilitiesImg" data-slide-to="2"></li>
+                            <li data-target="#facilitiesImg" data-slide-to="3"></li>
+                            <li data-target="#facilitiesImg" data-slide-to="4"></li>
+                            <li data-target="#facilitiesImg" data-slide-to="5"></li>
+                            <li data-target="#facilitiesImg" data-slide-to="6"></li>
+                        </ul>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="/static/img/personal_1.png" alt="Personal_Area" width="800px" height="500px">
+                                <div class="carousel-caption">
+                                    <h3>개인 캠퍼스 공간</h3>
+                                    <p>넓고 쾌적한 공간에서, 칸막이로 집중력 up !</p>
+                                </div>
+                            </div>
+                            <div class="carousel-item ">
+                                <img src="/static/img/personal_2.jpg" alt="Personal_Area" width="800px" height="500px">
+                                <div class="carousel-caption">
+                                    <h3>개인 캠퍼스 공간</h3>
+                                    <p>넓고 쾌적한 공간에서, 칸막이로 집중력 up !</p>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="/static/img/group_1.png" alt="Group_Area" width="800px" height="500px">
+                                <div class="carousel-caption">
+                                    <h3>그룹 스터디룸</h3>
+                                    <p>함께 공부하고 회의도 하면서 능률도 up !</p>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="/static/img/group_2.png" alt="Group_Area" width="800px" height="500px">
+                                <div class="carousel-caption">
+                                    <h3>그룹 스터디룸</h3>
+                                    <p>함께 공부하고 회의도 하면서 능률도 up !</p>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="/static/img/group_3.png" alt="Group_Area" width="800px" height="500px">
+                                <div class="carousel-caption">
+                                    <h3>그룹 스터디룸</h3>
+                                    <p>함께 공부하고 회의도 하면서 능률도 up !</p>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="/static/img/restArea_1.png" alt="Rest_Area" width="800px" height="500px">
+                                <div class="carousel-caption">
+                                    <h3>휴게 공간</h3>
+                                    <p>머리도 식히고 간식으로 당 충전하면서 refresh !</p>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="/static/img/restArea_2.png" alt="Rest_Area" width="800px" height="500px">
+                                <div class="carousel-caption">
+                                    <h3>휴게 공간</h3>
+                                    <p>머리도 식히고 간식으로 당 충전하면서 refresh !</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="margin-top: -230px;">
+                            <a class="carousel-control-prev" href="#facilitiesImg" data-slide="prev">
+                                <span class="carousel-control-prev-icon"></span>
+                            </a>
+                            <a class="carousel-control-next" href="#facilitiesImg" data-slide="next">
+                                <span class="carousel-control-next-icon"></span>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <br><br><br>
+            <!-- 금액 안내-->
+            <div class="row gx-4 gx-lg-5 justify-content-center" style="height: 800px;">
+                <div class="col-lg-8 col-xl-6 text-center" style="margin-bottom: 20px;">
+                    <h2 class="mt-0">이용 금액</h2>
+                    <hr class="divider" />
+                </div>
+                <div class="row gx-4 gx-lg-5 justify-content-center mb-5">
+                    <p class="paymentInfo" style="margin-bottom: 50px;">
+                        * 개인 캠퍼스와 스터디룸 기본 이용 금액입니다. <br>
+                        * 연속적으로만 사용할 수 있습니다. 외출은 자유롭게 할 수 있으나, 시간이 자동으로 멈추지 않습니다.
+                    </p>
+                    <div class="col-lg-6 membershipInfoTable">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>** 개인 캠퍼스 이용 금액 **</tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>1시간</td>
+                                <td>1,500 원</td>
+                            </tr>
+                            <tr>
+                                <td>2시간</td>
+                                <td>3,000 원</td>
+                            </tr>
+                            <tr>
+                                <td>3시간</td>
+                                <td>4,500 원</td>
+                            </tr>
+                            <tr>
+                                <td>4시간</td>
+                                <td>6,000 원</td>
+                            </tr>
+                            <tr>
+                                <td>6시간</td>
+                                <td>7,500 원</td>
+                            </tr>
+                            <tr>
+                                <td>8시간</td>
+                                <td>9,000 원</td>
+                            </tr>
+                            <tr>
+                                <td>10시간</td>
+                                <td>12,000 원</td>
+                            </tr>
+                            <tr>
+                                <td>당일 종일권</td>
+                                <td>15,000 원</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <p class="paymentInfo" style="width: 70%; text-align: left; margin: 5%;">
+                            * 당일 종일권은 결제 당일 24:00까지 유효합니다.
+                        </p>
+                    </div>
+                    <br><br>
+                    <div class="col-lg-6 membershipInfoTable">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>** 그룹 스터디룸 이용 금액 **</tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>2인실</td>
+                                <td>4,000 원</td>
+                            </tr>
+                            <tr>
+                                <td>4인실</td>
+                                <td>7,000 원</td>
+                            </tr>
+                            <tr>
+                                <td>6인실</td>
+                                <td>10,000 원</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <p class="paymentInfo" style="width: 70%; text-align: left; margin: 5%;">
+                            * 룸당 1시간 이용 금액입니다. (인당 금액 아닙니다.) <br>
+                            * 정기적인 이용을 원하실 경우 관리자에게 문의해주세요.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+{{>layout/footer}}

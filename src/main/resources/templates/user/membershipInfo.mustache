@@ -1,0 +1,181 @@
+{{>layout/header}}
+{{>layout/navbar}}
+<body>
+<!-- membership -->
+<section class="page-section" id="membership">
+    <br><br>
+    <div class="container px-4 px-lg-5">
+        <!-- 시간권 멤버쉽 -->
+        <div class="row gx-4 gx-lg-5 justify-content-center" style="height: 450px;">
+            <div class="col-lg-8 col-xl-6 text-center" style="margin-bottom: 20px;">
+                <h2 class="mt-0">시간권</h2>
+                <hr class="divider" />
+            </div>
+            <div class="row gx-4 gx-lg-5 justify-content-center mb-5">
+                <div class="col-lg-6 membershipInfoTable">
+                    <table class="table table-hover">
+                        <tbody>
+                        <tr>
+                            <td>50 시간권</td>
+                            <td>69,000 원</td>
+                        </tr>
+                        <tr>
+                            <td>100 시간권</td>
+                            <td>125,000 원</td>
+                        </tr>
+                        <tr>
+                            <td>150 시간권</td>
+                            <td>179,000 원</td>
+                        </tr>
+                        <tr>
+                            <td>200 시간권</td>
+                            <td>219,000 원</td>
+                        </tr>
+                        <tr>
+                            <td>300 시간권</td>
+                            <td>289,000 원</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="membershipInfo">
+                    * 할인가로 시간을 충전하여 이용시간만큼 차감되는 방식이며, 캠퍼스 이용에 가장 적합한 할인권입니다. <br>
+                    * 시간권 이용자라 하더라도 캠퍼스 내에 빈 좌석이 없는 경우, 캠퍼스 이용이 불가합니다.
+                </p>
+            </div>
+        </div>
+        <!-- 금액권 멤버쉽 -->
+        <div class="row gx-4 gx-lg-5 justify-content-center" style="height: 600px; margin-top: 20px;">
+            <div class="col-lg-8 col-xl-6 text-center" style="margin-bottom: 20px;">
+                <h2 class="mt-0">금액권</h2>
+                <hr class="divider" />
+            </div>
+            <div class="row gx-4 gx-lg-5 justify-content-center mb-5">
+                <div class="col-lg-6 membershipInfoTable2">
+                    <table class="table table-hover">
+                        <tbody>
+                        <tr>
+                            <td>5만원권</td>
+                            <td>47,500 원</td>
+                            <td>( 2,500원 할인 )</td>
+
+                        </tr>
+                        <tr>
+                            <td>10만원권</td>
+                            <td>94,000 원</td>
+                            <td>( 6,000원 할인 )</td>
+                        </tr>
+                        <tr>
+                            <td>15만원권</td>
+                            <td>138,000 원</td>
+                            <td>( 12,000원 할인 )</td>
+                        </tr>
+                        <tr>
+                            <td>20만원권</td>
+                            <td>180,000 원</td>
+                            <td>( 20,000원 할인 )</td>
+                        </tr>
+                        <tr>
+                            <td>30만원권</td>
+                            <td>250,000 원</td>
+                            <td>( 50,000원 할인 )</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="membershipInfo">
+                    * 할인가로 시간을 충전하여 이용시간만큼 차감되는 방식이며, 캠퍼스와 스터디룸에 모두 사용할 수 있지만, 특히 스터디룸 이용에 적합한 할인권입니다.<br>
+                    * 캠퍼스와 스터디룸 이용시, 이용 금액을 차감하면서 이용할 수 있습니다. <br>
+                    * 충전식 금액권으로 캠퍼스 이용도중 퇴실시에는 남은 시간이 적립되지 않습니다. <br>
+                    * 금액권 회원이라 하더라도 캠퍼스 내에 빈좌석이 없는 경우 캠퍼스 이용이 불가합니다.
+                </p>
+            </div>
+        </div>
+    </div>
+    <!-- 멤버쉽 구매 -->
+    <div class="row gx-4 gx-lg-5 justify-content-center" style="height: 500px; margin-top: 20px;">
+        <div class="col-lg-8 col-xl-6 text-center" style="margin-bottom: 20px;">
+            <h2 class="mt-0">멤버쉽 구매하기</h2>
+            <hr class="divider" />
+        </div>
+        <div class="row gx-4 gx-lg-5 justify-content-center mb-5">
+            <div class="col-lg-6" style="width: 65%;">
+                <div class="selectMembership">
+                    <!-- 시간권 -->
+                    <div class="selectMembershipType">시간권</div>
+                    <select class="form-control" id="selectTime" onchange="selectTimePass()">
+                        <option value="0">선택 안함</option>
+                        <option value="69000">50 시간권 (69,000 원)</option>
+                        <option value="125000">100 시간권 (125,000 원)</option>
+                        <option value="179000">150 시간권 (179,000 원)</option>
+                        <option value="219000">200 시간권 (219,000 원)</option>
+                        <option value="289000">300 시간권 (289,000 원)</option>
+                    </select><br>
+                    <!-- 금액권 -->
+                    <div class="selectMembershipType">금액권</div>
+                    <select class="form-control" id="selectMoney" onchange="selectMoneyPass()">
+                        <option value="0">선택 안함</option>
+                        <option value="47500">5 만원권 (47,500 원)</option>
+                        <option value="94000">10 만원권 (94,000 원)</option>
+                        <option value="138000">15 만원권 (138,000 원)</option>
+                        <option value="180000">20 만원권 (180,000 원)</option>
+                        <option value="250000">30 만원권 (250,000 원)</option>
+                    </select>
+                </div>
+                <div class="selectMembership2">
+                    <div class="selectMembership2-Title">선택한 시간권 및 금액권</div>
+                    <hr>
+                    <div class="selectedMembershipZone">
+                        <p id="selectedTime"></p>
+                        <p id="selectedMoney"></p>
+                    </div>
+                    <hr>
+                    <div class="selectMembership3" id="selectedTotal">총 &nbsp;&nbsp;0 원</div>
+                </div>
+                <div class="paySubmit2">
+                    <button class="btn btn-primary btn-xl-sb-2" id="submitButton" type="submit">구매 하기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- select 박스 선택시 값 적용 -->
+<script>
+    function selectTimePass(){
+        var selectTime = document.getElementById("selectTime");
+        var selectTimeText = selectTime.options[selectTime.selectedIndex].text;
+        var selectTimeValue = selectTime.value;
+
+        document.querySelector("#selectedTime").innerHTML = "+ <b>"+selectTimeText+"</b>";
+
+        var selectMoneyValue = document.getElementById("selectMoney").value;
+        calculate(selectTimeValue,selectMoneyValue);
+    }
+
+    function selectMoneyPass(){
+        var selectMoney = document.getElementById("selectMoney");
+        var selectMoneyText = selectMoney.options[selectMoney.selectedIndex].text;
+        var selectMoneyValue = selectMoney.value;
+
+        document.querySelector("#selectedMoney").innerHTML = "+ <b>"+selectMoneyText+"</b>";
+
+        var selectTimeValue = document.getElementById("selectTime").value;
+        calculate(selectTimeValue,selectMoneyValue);
+    }
+
+    // 숫자로 변경후 합산
+    function calculate(time,money) {
+        var selectedTotalValue = numberWithCommas(parseInt(time)+parseInt(money));
+        document.querySelector("#selectedTotal").innerHTML = "총 &nbsp;&nbsp;"+ selectedTotalValue +"&nbsp;원";
+    }
+
+    // 금액에 콤마 추가
+    function numberWithCommas(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+</script>
+
+</body>
+{{>layout/footer}}
