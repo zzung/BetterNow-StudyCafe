@@ -1,4 +1,5 @@
 package com.project.betterNow.dto.response;
 
-public class MemberResponseDto {
+public class LoginUserInfoRs {
+
 }

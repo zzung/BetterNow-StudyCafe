@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Api(description = "멤버쉽 REST API")
 public class MembershipController {
 
-    @RequestMapping("/membership.ms")
+    @RequestMapping("/membership")
     public String membershipPage() {
         return "/user/membershipInfo";
     }

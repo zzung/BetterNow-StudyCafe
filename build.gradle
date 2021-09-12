@@ -44,7 +44,7 @@ dependencies {
 
     // Spring Boot starter
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    //implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
 
@@ -70,7 +70,7 @@ dependencies {
     implementation 'io.springfox:springfox-swagger-ui:2.9.2'
 
     // security
-    //compile('org.springframework.boot:spring-boot-starter-oauth2-client')
+    compile('org.springframework.boot:spring-boot-starter-oauth2-client')
 
     // modelmapper
     implementation 'org.modelmapper:modelmapper:2.3.0'

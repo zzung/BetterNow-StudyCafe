@@ -13,6 +13,6 @@ public class MainPageController {
         return "index";
     }
 
-    @RequestMapping("/facilities.ms")
+    @RequestMapping("/facilities")
     public String facilitesInfo() { return "/user/facilitiesInfo";}
 }

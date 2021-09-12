@@ -14,40 +14,51 @@ public class Member {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long memNum;
+    private Long mem_num;
 
-    @Column(length = 20, nullable = false)
+    @Column(name = "mem_id", length = 20, nullable = false)
     private String memId;
 
-    @Column(length = 20, nullable = false)
+    @Column(name = "mem_pwd", length = 20, nullable = false)
     private String memPwd;
 
     @Column(length = 11, nullable = false)
     private String phone;
 
-    @Column(length = 1)
+    @Column(name = "mem_yn", length = 1)
     private Character memYn;
 
     private Long chatRoomNum;
 
     private Long authNum;
 
-    @Builder
-    public Member(Long memNum, String memId, String memPwd, String phone, Character memYn, Long chatRoomNum, Long authNum) {
-        this.memNum = memNum;
-        this.memId = memId;
-        this.memPwd = memPwd;
-        this.phone = phone;
-        this.memYn = memYn;
-        this.chatRoomNum = chatRoomNum;
-        this.authNum = authNum;
-    }
+    @Column
+    private String picture;
+
+    /** JPA로 데이터베이스로 저장할 때 Enum 값을 어떤 형태로 저장할지 결정함
+     * 기본적으로는 int타입으로 저장되지만 분별력이 떨어지기 때문에 String으로 저장되도록 설정
+     * */
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Role role;
+
 
     @Builder
-    public Member(String memId, String memPwd, String phone) {
+    public Member(String memId, String picture, Role role) {
         this.memId = memId;
-        this.memPwd = memPwd;
-        this.phone = phone;
+        this.picture = picture;
+        this.role = role;
     }
+
+    public Member updateMyPicture(String memId,String picture) {
+        this.memId = memId;
+        this.picture = picture;
+        return this;
+    }
+
+    public String getRoleKey() {
+        return this.role.getKey();
+    }
+
 
 }
