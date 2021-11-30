@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "spring.mustache.security.prefix",
+      "type": "java.lang.String",
+      "description": "Description for spring.mustache.security.prefix."
+  }
+] }

@@ -1,0 +1,53 @@
+<head>
+  <th:block th:replace="/layout/header" />
+  <th:block th:replace="/layout/navbar" />
+</head>
+<body>
+<section class="page-section" id="joinus">
+  <br><br>
+  <div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-lg-8 col-xl-6 text-center">
+        <h2 class="mt-0">회원가입</h2>
+        <hr class="divider" />
+      </div>
+    </div>
+    <div class="row gx-4 gx-lg-5 justify-content-center mb-5">
+      <div class="col-lg-6">
+        <form th:action="@{/signupForm}" th:object="${memberDto}" method="post" data-sb-form-api-token="API_TOKEN">
+          <!-- Id input check -->
+          <div class="form-floating mb-3">
+            <input th:field="*{memId}" class="form-control" id="memId" name="memId" type="text" placeholder="아이디를 입력해주세요" required />
+            <label for="memId">이메일을 입력해주세요</label>
+            <div th:if="${#fields.hasErrors('memId')}" th:errors="*{memId}" class="join-id-feedback"></div>
+          </div>
+          <!-- Password input check -->
+          <div class="form-floating mb-3">
+            <input th:field="*{memPwd}" class="form-control" id="memPwd" name="memPwd" type="password" placeholder="비밀번호를 입력해주세요" required />
+            <label for="memPwd">비밀번호를 입력해주세요</label>
+            <div th:if="${#fields.hasErrors('memPwd')}" th:errors="*{memPwd}" class="join-pwd-feedback"></div>
+          </div>
+          <!-- Password input check -->
+          <div class="form-floating mb-3">
+            <input class="form-control" id="pwdCheck" name="pwdCheck" type="password" placeholder="비밀번호를 한번 더 입력해주세요" required />
+            <label for="pwdCheck">비밀번호를 한번 더 입력해주세요</label>
+            <div id="pwdCheckMsg" name="pwdCheckMsg" class="join-pwdcheck-feedback"></div>
+          </div>
+          <!-- phoneNumber input-->
+          <div class="form-floating mb-3">
+            <input th:field="*{phone}" class="form-control" id="phone" name="phone" type="number" placeholder="휴대폰 번호를 입력해주세요" required />
+            <label for="phone">휴대폰 번호를 입력해주세요</label>
+            <div th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}" class="join-phone-feedback"></div>
+          </div><br>
+          <!-- Submit Button-->
+          <div class="d-grid">
+            <button id="submitButton" type="submit" class="btn btn-primary btn-xl" >가입하기</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+</body>
+<script type="text/javascript" th:src="@{../static/js/custom/signup.js}"></script>
+<footer th:replace="/layout/footer" />

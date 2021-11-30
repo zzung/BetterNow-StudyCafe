@@ -1,0 +1,111 @@
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <th:block th:replace="/layout/header" />
+    <th:block th:replace="/layout/navbar" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous"></head>
+</head>
+<body>
+    <section class="page-section" id="board">
+        <br><br>
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center" style="height: 900px;">
+                <div class="col-lg-8 col-xl-6 text-center" style="margin-bottom: 20px;">
+                    <h2 class="mt-0">게시판</h2>
+                    <hr class="divider" />
+                </div>
+                <div class="row gx-4 gx-lg-5 justify-content-center mb-5">
+                    <div class="boardSearchBar">
+                        <button sec:authorize="isAuthenticated()" class="btn btn-primary" type="button" onclick="location.href='/board/write'">글쓰기</button>
+                    </div>
+                    <div class="input-group mb-5 boardSearchBar">
+                        <input type="text" class="form-control" placeholder="검색어를 입력해주세요">
+                        <div class="input-group-append">
+                            <button class="btn searchBtn" type="submit">Go</button>
+                        </div>
+                    </div>
+                    <table class="table table-striped boardTable">
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>제목</th>
+                                <th>작성자</th>
+                                <th>작성일</th>
+                                <th>조회수</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- 공지사항 일때 -->
+                            <tr th:each="notice : ${noticeList}" style="color: #f4623a;">
+                                <input type="hidden" name="noticeNum" th:text="${notice.noticeNum}" th:value="${notice.num}">
+                                <td><i class="fas fa-star" style="color: #f4623a;"></i></td>
+                                <td>
+                                    <a th:href="@{'/notice/' + ${notice.noticeNum}}">
+                                        <span th:text="${notice.noticeTitle}"></span>
+                                    </a>
+                                </td>
+                                <td>
+                                    <span th:text="${notice.adminNum}"></span>
+                                </td>
+                                <td>
+                                    <span th:text="${notice.createDate}"></span>
+                                </td>
+                                <td>
+                                    <span th:text="${notice.noticeViewCount}"></span>
+                                </td>
+                            </tr>
+                            <!-- 일반 게시글 일때 -->
+                            <tr th:each="board : ${boardList}">
+                                <td>
+                                    <span th:text="${board.boardNum}"></span>
+                                </td>
+                                <td>
+                                    <a th:href="@{'/board/' + ${board.boardNum}}">
+                                        <span th:text="${board.boardTitle}"></span>
+                                    </a>
+                                </td>
+                                <td>
+                                    <span th:text="${board.member.memId}"></span>
+                                </td>
+                                <td>
+                                    <span th:text="${#dates.format(board.createDate, 'yyyy.MM.dd HH:mm:ss')}"></span>
+<!--                                    <span th:text="${board.createDate}"></span>-->
+                                </td>
+                                <td>
+                                    <span th:text="${board.boardViews}"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td><a>제목 제목 2222222222</a></td>
+                                <td>작성자</td>
+                                <td>2020-11-12</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td><a>제목 제목 253242</a></td>
+                                <td>작성자2</td>
+                                <td>2020-01-12</td>
+                                <td>12</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="pagination-wrapper">
+                    <ul class="pagination2" id="pages">
+                        <li class="page-item"><a class="page-link" href="#">Prev</a></li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item active"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">4</a></li>
+                        <li class="page-item"><a class="page-link" href="#">5</a></li>
+                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+</section>
+</body>
+<script type="text/javascript" th:src="@{../static/js/custom/boardList.js}"></script>
+<footer th:replace="/layout/footer" />
+</html>

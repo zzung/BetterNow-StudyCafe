@@ -1,0 +1,52 @@
+<head>
+    <th:block th:replace="/layout/header" />
+    <th:block th:replace="/layout/navbar" />
+</head>
+<body>
+    <!-- login -->
+    <section class="page-section" id="login">
+        <br><br>
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-lg-8 col-xl-6 text-center">
+                    <h2 class="mt-0">로그인</h2>
+                    <hr class="divider" />
+                </div>
+            </div>
+            <div class="row gx-4 gx-lg-5 justify-content-center mb-5">
+                <div class="col-lg-6" style="width: 40%;">
+                    <form th:action="@{/doLogin}" method="post" th:object="${LoginRq}" data-sb-form-api-token="API_TOKEN">
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+                        <div class="form-floating mb-3">
+                            <input class="form-control" id="loginId" name="loginId" type="text" placeholder="아이디를 입력해주세요" data-sb-validations="required" />
+                            <label for="loginId">아이디를 입력해주세요</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input class="form-control" id="loginPwd" name="loginPwd" type="password" placeholder="비밀번호를 입력해주세요" data-sb-validations="required" />
+                            <label for="loginPwd">비밀번호를 입력해주세요</label>
+                        </div>
+                        <div th:if="${not #strings.isEmpty(LoginFailMessage)}">
+                            <div th:text="${LoginFailMessage}" class="login-id-feedback" id="LoginFailMessage" name="LoginFailMessage"></div>
+                        </div>
+                        <br>
+                        <div class="d-grid">
+                            <input type="submit" class="btn btn-primary btn-xl" id="loginSubmit" value="로그인">
+                        </div>
+                    </form>
+                    <div class="d-grid">
+                        <button type="button" class="btn btn-success btn-xl" onclick="location.href='/signupForm'">회원 가입</button>
+                    </div>
+                    <div class="d-grid">
+                        <button type="button" class="btn btn-secondary btn-xl" onclick="location.href='/find/Info'">아이디/비밀번호 찾기</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div th:if="${not #strings.isEmpty(alertMsg)}">
+        <script type="text/javascript">
+            alert('회원가입 완료 ! BETTERNOW 회원이 되신 것을 환영합니다 :)');
+        </script>
+    </div>
+</body>
+<footer th:replace="/layout/footer" />

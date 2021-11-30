@@ -2834,15 +2834,13 @@ textarea.form-control-lg {
     color: #dc3545;
 }
 .login-id-feedback, .login-pwd-feedback {
-    /* display: none; */
     width: 100%;
     margin-top: 0.25rem;
     font-size: 0.875em;
     color: #dc3545;
     margin-left: 0.5em;
 }
-.join-id-feedback, .join-pwd-feedback, .join-pwdcheck-feedback {
-    /* display: none; */
+.join-id-feedback, .join-pwd-feedback, .join-pwdcheck-feedback, .join-phone-feedback {
     width: 100%;
     margin-top: 0.25rem;
     font-size: 0.875em;
@@ -11350,10 +11348,10 @@ header.masthead h1, header.masthead .h1 {
     font-family: "Merriweather Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     text-align: center;
 }
-.boardTable tbody>tr:hover {
-    cursor: pointer;
-    background-color: rgb(231, 231, 231);
-}
+/*.boardTable tbody>tr:hover {*/
+/*    cursor: pointer;*/
+/*    background-color: rgb(231, 231, 231);*/
+/*}*/
 .boardTable td {
     font-weight: normal;
     font-size: small;
@@ -11379,9 +11377,11 @@ header.masthead h1, header.masthead .h1 {
 }
 .boardSearchBar {
     width: 35%;
-    margin: 0 auto;
-    margin-top: -10px;
+    margin: -10px auto 0;
     font-family: "Merriweather Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+.boardSearchBar>input {
+    height: 40px;
 }
 .boardSearchBar>button, .boardSearchBar>input {
     font-size: small;
@@ -11398,8 +11398,8 @@ header.masthead h1, header.masthead .h1 {
 .summernoteArea {
     width: 80%;
 }
-.writeBoard {
-    float: right;
+.writeBoardBtns {
+    text-align: center;
     margin-top: 20px;
 }
 #boardTitle {
@@ -11620,4 +11620,7 @@ header.masthead h1, header.masthead .h1 {
 }
 .selectMembership2-Title {
     position: relative;
+}
+.findPwd-modal-body, .findId-modal-body {
+    padding: 5%;
 }

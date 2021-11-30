@@ -1,6 +1,7 @@
-{{>layout/header}}
-{{>layout/navbar}}
-<!-- mainPage -->
+<head>
+    <th:block th:replace="/layout/header" />
+    <th:block th:replace="/layout/navbar" />
+</head>
 <body id="page-top">
 <header class="masthead">
     <div class="container px-4 px-lg-5 h-100">
@@ -15,7 +16,7 @@
                     오롯이 집중할 수 있도록, 쾌적하고 편안한 공간을 제공해드려요. <br>
                     내가 원하는 자리에서, 원하는 시간만큼 자유롭게 !
                 </p>
-                <a class="btn btn-primary btn-xl" href="#membership">좌석 예약하기</a>
+                <a class="btn btn-primary btn-xl" href="/choiceSeat">좌석 예약하기</a>
             </div>
         </div>
     </div>
@@ -92,4 +93,4 @@
     </div>
 </section>
 </body>
-{{>layout/footer}}
+<footer th:replace="/layout/footer" />

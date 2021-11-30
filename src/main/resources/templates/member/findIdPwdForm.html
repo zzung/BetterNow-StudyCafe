@@ -1,0 +1,129 @@
+<head>
+    <th:block th:replace="/layout/header" />
+    <th:block th:replace="/layout/navbar" />
+    <!-- modal 에 필요한 파일들 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <!-- findIdPwd -->
+    <section class="page-section">
+        <br><br>
+        <div class="container px-4 px-lg-5" style="height: 350px;">
+            <!-- findId -->
+            <div class="container px-4 px-lg-5" style="width: 43%; float: left; margin-left: 10%">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-lg-8 col-xl-6 text-center">
+                        <h3 class="mt-0">아이디 찾기</h3>
+                        <hr class="divider" />
+                    </div>
+                </div>
+                <div class="row gx-4 gx-lg-5 justify-content-center mb-5">
+                    <div class="col-lg-6-2">
+                        <form data-sb-form-api-token="API_TOKEN">
+                            <div class="form-floating mb-3">
+                                <input id="findIdByPhone" th:name="phone" type="number" class="form-control" placeholder="가입한 휴대폰번호를 입력해주세요. " />
+                                <label for="findIdByPhone">가입한 휴대폰번호를 입력해주세요.</label>
+                            </div>
+                            <br>
+                            <div class="d-grid">
+                                <input id="findIdBtn" type="button" class="btn btn-primary btn-xl" onclick="findId()" value="아이디 찾기">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- findPwd -->
+            <div class="px-4 px-lg-5" style="width: 43%; float: left;">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-lg-8 col-xl-6 text-center">
+                        <h3 class="mt-0">비밀번호 찾기</h3>
+                        <hr class="divider" />
+                    </div>
+                </div>
+                <div class="row gx-4 gx-lg-5 justify-content-center mb-5">
+                    <div class="col-lg-6-2">
+                        <form id="findPwd" data-sb-form-api-token="API_TOKEN">
+                            <!-- ID input-->
+                            <div class="form-floating mb-3">
+                                <input class="form-control" id="findPwdByMemId" type="text" th:name="memId" placeholder="아이디를 입력해주세요" required />
+                                <label for="findPwdByMemId">아이디를 입력해주세요</label>
+                            </div>
+                            <!-- phone input-->
+                            <div class="form-floating mb-3">
+                                <input class="form-control" id="findPwdByPhone" th:name="phone" type="text" placeholder="휴대폰번호를 입력해주세요" required />
+                                <label for="findPwdByPhone">휴대폰번호를 입력해주세요</label>
+                            </div>
+                            <br>
+                            <!-- Submit Button-->
+                            <div class="d-grid">
+                                <input id="findPwdBtn" type="button" class="btn btn-primary btn-xl" onclick="findPwd()" value="비밀번호 찾기">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- find Id Modal -->
+    <div class="container" >
+        <div class="modal fade" id="findIdModal">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">아이디 찾기</h5>
+                    </div>
+                    <div id="findId-modal-body" class="findId-modal-body"></div>
+                    <div class="modal-footer">
+                        <button type="button" id="goLoginPage" class="btn btn-primary" onclick="location.href='/login'">로그인 하기</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">확인</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- find Pwd Modal -->
+    <div class="container" >
+        <div class="modal fade" id="findPwdModal">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">비밀번호 찾기</h5>
+                    </div>
+                    <!-- 회원 정보가 없을 때 -->
+                    <div id="findPwd-modal-body" class="findPwd-modal-body"></div>
+                    <div id="findPwd-modal-footer" class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">확인</button>
+                    </div>
+                    <!-- 회원 정보가 있을 때 비밀번호 변경 -->
+                    <form id="changePwdForm" data-sb-form-api-token="API_TOKEN">
+                        <div class="modal-body">
+                            <div class="form-floating mb-3">
+                                <input class="form-control" id="changePwd" th:name="memPwd" type="password" placeholder="새로운 비밀번호를 입력해주세요" required />
+                                <label for="changePwd">새로운 비밀번호를 입력해주세요</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input class="form-control" id="changePwdCheck" type="password" placeholder="비밀번호를 한번 더 입력해주세요" required />
+                                <label for="changePwdCheck">비밀번호를 한번 더 입력해주세요</label>
+                                <div id="changePwdCheckMsg" class="join-id-feedback"></div>
+                            </div>
+                            <input type="hidden" th:name="memId" id="changePwdByMemId">
+                        </div>
+                        <div class="modal-footer">
+                            <div class="d-grid">
+                                <input id="changePwdInput" type="button" class="btn btn-primary" onclick="changePwdBtn()" disabled="" value="비밀번호 변경하기">
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+<script type="text/javascript" th:src="@{../static/js/custom/findIdPwd.js}"></script>
+<footer th:replace="/layout/footer" />

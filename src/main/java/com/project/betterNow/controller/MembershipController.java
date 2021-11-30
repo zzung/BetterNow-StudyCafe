@@ -10,7 +10,7 @@ public class MembershipController {
 
     @RequestMapping("/membership")
     public String membershipPage() {
-        return "/user/membershipInfo";
+        return "/member/membershipInfo";
     }
 
 

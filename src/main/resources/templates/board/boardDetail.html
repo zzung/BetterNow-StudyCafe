@@ -1,0 +1,208 @@
+<head>
+    <th:block th:replace="/layout/header" />
+    <th:block th:replace="/layout/navbar" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous"></head>
+</head>
+<body>
+    <!-- board detail -->
+    <section class="page-section" id="board">
+        <br><br>
+        <div class="container px-4 px-lg-5">
+            <!-- 상세 글 -->
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <!-- 글 수정 클릭시 이동할 form -->
+                <!-- <form id="boardEditForm" method="POST" action=""> -->
+                <div class="col-lg-8 col-xl-6 text-center" style="margin-bottom: 20px;">
+                    <h4 class="mt-0">제목 test test test test</h4>
+                    <hr class="divider" />
+                    <h6 class="">john</h6>
+                    <div class="">2021.02.12</div>
+                </div>
+                <div class="row gx-4 gx-lg-5 justify-content-center mb-5 summernoteContents">
+                    <p class="summernoteContent2">
+                        asdfasdf <br>
+                        asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹfasdfasdfasdfasdfasdfaasdfasdfasdfasdfasdfasdf
+                        asdfasdf <br>
+                        asdfasdf <br>
+                        asdfasdf <br>
+                        asdfasdf <br>
+                        asdfasdf <br>sdfasdfasdfasdfasdfasdfasdfasdfassdfasdfasdfasdfasdfasdfasdfasdfassdfasdfasdfasdfasdfasdfasdfasdfassdfasdfasdfasdfasdfasdfasdfasdfassdfasdfasdfasdfasdfasdfasdfasdfas
+                        asdfasdf <br>
+                        asdfasdf <br>
+                        asdfasdf <br>
+                        asdfasdf <br>
+                        asdfasdf <br>
+                        asdfasdf <br>
+                        asdfasdf <br>
+                        asdfasdf <br>
+                        asdfasdf <br>
+                        asdfasdf <br>
+                        asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇ <br>
+                        asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇ
+                        asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇ
+                    </p>
+                    <button class="btn btn-outline-secondary boardBtn" id="boardEdit" type="submit" onclick="location.href='#'">글 수정</button>
+                    <button class="btn btn-outline-secondary boardBtn" id="boardRemove" type="button" onclick="boardRemoveBtn();">글 삭제</button>
+
+                </div>
+
+                <!-- </form> -->
+
+                <!-- 댓글 영역 -->
+                <!-- <form id="moreViewReply"> -->
+                <!-- 댓글 갯수 / 댓글 작성란 -->
+                <h4 style="width: 70%; margin-bottom: 10px">댓글 22개</h4>
+                <div class="row gx-4 gx-lg-5  mb-5 replyZone">
+                    <textarea class="form-control inputReply" id="writeReply" placeholder="댓글을 입력해주세요 (500자 까지 작성 가능)" maxlength="500" style="resize: none;"></textarea>
+                    <button class="btn btn-primary saveReply float-right" id="saveReplyBtn" onclick="saveReplyBtn();">작성</button>
+                </div>
+
+                <!-- 댓글 목록 -->
+                <div class="row gx-4 gx-lg-5 mb-5 replyList">
+                    <!-- 댓글 없을 때
+                    <h6 class="replyEmptyInfo" style="text-align: center;">
+                        <hr>등록된 댓글이 없습니다.
+                    </h6>
+                    -->
+                    <div class="replyEntity">
+                        <input type="hidden" name="replyNum" value="11">
+                        <hr>
+                        <div class="replyImg"><img src="" width="50" height="50"></div>
+                        <div class="replyWriter">TreeTree</div>
+                        <div class="replyDate">2021.06.23
+                            <a href="javascript:void(0);" onclick="replyRemove(this);" class="replyRemove">삭제</a>
+                            <a href="javascript:void(0)" onclick="replyEdit(this);" class="replyEdit">수정</a>
+                        </div>
+                        <div class="replyContent">
+                            11111111111111111
+                            sdfasdfasdfasdfasdfasdㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇdddddasdfasdfasdfasdfasdfadsfafadfads
+                            asdfasdfasdfasdfasdfasdfasdfasdfa
+                            sdfasdfasdfasdfasdfasdㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇ
+                            asdfasdfasdfasdfasdfasdfasdfasdfa
+                            sdfasdfasdfasdfasdfasdㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇ
+                            asdfasdfasdfasdfasdfasdfasdfasdfa
+                            sdfasdfasdfasdfasdfasdㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇ
+                            sdfasdfasdfasdfasdfasdㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇ
+                            sdfasdfasdfasdfasdfasdㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇ
+                        </div>
+                    </div>
+                    <div class="replyEntity">
+                        <input type="hidden" name="replyNum" value="12">
+                        <hr>
+                        <div class="replyImg"><img src="" width="50" height="50"></div>
+                        <div class="replyWriter">TreeTree</div>
+                        <div class="replyDate">2021.06.23
+                            <a href="javascript:void(0);" onclick="replyRemove(this);" class="replyRemove">삭제</a>
+                            <a href="javascript:void(0)" onclick="replyEdit(this);" class="replyEdit">수정</a>
+                        </div>
+                        <div class="replyContent">
+                            2
+                            sdfasdfasdfasdfasdfasdㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇdddddasdfasdfasdfasdfasdfadsfafadfads
+                            asdfasdfasdfasdfasdfasdfasdfasdfa
+                            sdfasdfasdfasdfasdfasdㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇ
+                            asdfasdfasdfasdfasdfasdfasdfasdfa
+                            sdfasdfasdfasdfasdfasdㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇ
+                            asdfasdfasdfasdfasdfasdfasdfasdfa
+                            sdfasdfasdfasdfasdfasdㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇ
+                        </div>
+                    </div>
+                    <div class="replyEntity">
+                        <input type="hidden" name="replyNum" value="13">
+                        <hr>
+                        <div class="replyImg"><img src="" width="50" height="50"></div>
+                        <div class="replyWriter">TreeTree</div>
+                        <div class="replyDate">2021.06.23
+                            <a href="javascript:void(0);" onclick="replyRemove(this);" class="replyRemove">삭제</a>
+                            <a href="javascript:void(0)" onclick="replyEdit(this);" class="replyEdit">수정</a>
+                        </div>
+                        <div class="replyContent">
+                            3
+                            ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㄲㄲㄲㄲㄲㄲㄲㄱㅉㅉㅈㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴ
+                        </div>
+                    </div>
+                    <div class="replyEntity">
+                        <hr>
+                        <div class="replyImg"><img src="" width="50" height="50"></div>
+                        <div class="replyWriter">TreeTree</div>
+                        <div class="replyDate">2021.06.23</div>
+                        <div class="replyContent">
+                            444sdfasdfasdfasdfasdfasdㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴ
+                        </div>
+                    </div>
+                    <div class="replyEntity">
+                        <hr>
+                        <div class="replyImg"><img src="" width="50" height="50"></div>
+                        <div class="replyWriter">TreeTree</div>
+                        <div class="replyDate">2021.06.23</div>
+                        <div class="replyContent">
+                            5555555 sdfasdfasdfㅁㄴㅈㄷㅎㄴㅎㄱㄹㅁㄴㅇㄹㅇㄹ남ㅇ러미ㅑㄷ힘ㅁㅈ럼ㅇ룽
+                        </div>
+                    </div>
+                    <div class="replyEntity">
+                        <hr>
+                        <div class="replyImg"><img src="" width="50" height="50"></div>
+                        <div class="replyWriter">TreeTree</div>
+                        <div class="replyDate">2021.06.23</div>
+                        <div class="replyContent">
+                            6 sdfasdfasdfㅁㄴㅈㄷㅎㄴㅎㄱㄹㅁㄴㅇㄹㅇㄹ남ㅇ러미ㅑㄷ힘ㅁㅈ럼ㅇ룽
+                        </div>
+                    </div>
+                    <div class="replyEntity">
+                        <hr>
+                        <div class="replyImg"><img src="" width="50" height="50"></div>
+                        <div class="replyWriter">TreeTree</div>
+                        <div class="replyDate">2021.06.23</div>
+                        <div class="replyContent">
+                            7 sdfasdfasdfㅁㄴㅈㄷㅎㄴㅎㄱㄹㅁㄴㅇㄹㅇㄹ남ㅇ러미ㅑㄷ힘ㅁㅈ럼ㅇ룽
+                        </div>
+                    </div>
+                    <div class="replyEntity">
+                        <hr>
+                        <div class="replyImg"><img src="" width="50" height="50"></div>
+                        <div class="replyWriter">TreeTree</div>
+                        <div class="replyDate">2021.06.23</div>
+                        <div class="replyContent">
+                            8 sdfasdfasdfㅁㄴㅈㄷㅎㄴㅎㄱㄹㅁㄴㅇㄹㅇㄹ남ㅇ러미ㅑㄷ힘ㅁㅈ럼ㅇ룽
+                        </div>
+                    </div>
+                    <div class="replyEntity">
+                        <hr>
+                        <div class="replyImg"><img src="" width="50" height="50"></div>
+                        <div class="replyWriter">TreeTree</div>
+                        <div class="replyDate">2021.06.23</div>
+                        <div class="replyContent">
+                            99999 sdfasdfasdfㅁㄴㅈㄷㅎㄴㅎㄱㄹㅁㄴㅇㄹㅇㄹ남ㅇ러미ㅑㄷ힘ㅁㅈ럼ㅇ룽
+                        </div>
+                    </div>
+                    <div class="replyEntity">
+                        <hr>
+                        <div class="replyImg"><img src="" width="50" height="50"></div>
+                        <div class="replyWriter">TreeTree</div>
+                        <div class="replyDate">2021.06.23</div>
+                        <div class="replyContent">
+                            10 sdfasdfasdfㅁㄴㅈㄷㅎㄴㅎㄱㄹㅁㄴㅇㄹㅇㄹ남ㅇ러미ㅑㄷ힘ㅁㅈ럼ㅇ룽
+                        </div>
+                    </div>
+                    <div class="replyEntity">
+                        <hr>
+                        <div class="replyImg"><img src="" width="50" height="50"></div>
+                        <div class="replyWriter">TreeTree</div>
+                        <div class="replyDate">2021.06.23</div>
+                        <div class="replyContent">
+                            11 sdfasdfasdfㅁㄴㅈㄷㅎㄴㅎㄱㄹㅁㄴㅇㄹㅇㄹ남ㅇ러미ㅑㄷ힘ㅁㅈ럼ㅇ룽
+                        </div>
+                    </div>
+                    <!-- 댓글 더보기 -->
+                    <div class="moreView text-center" id="moreViewArea">
+                        <hr><a href="javascript:void(0);" onclick="moreViewBtn();">댓글 더보기</a>
+                    </div>
+
+                </div>
+                <!-- </form> -->
+            </div>
+        </div>
+    </section>
+</body>
+<script type="text/javascript" th:src="@{../static/js/custom/boardDetail.js}"></script>
+<footer th:replace="/layout/footer" />
+</html>

@@ -1,0 +1,155 @@
+<head>
+    <th:block th:replace="/layout/header" />
+    <th:block th:replace="/layout/navbar" />
+</head>
+<body>
+    <section class="page-section" id="membership">
+        <br><br>
+        <div class="container px-4 px-lg-5" style="height: 600px;">
+            <!-- 자리 선택 -->
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-lg-8 col-xl-6 text-center">
+                        <h3 class="mt-0">자리 선택</h3>
+                        <hr class="divider" /><br>
+                    </div>
+                    <p class="seatPayInfo row gx-4 gx-lg-5 justify-content-center">
+                        <b style="color: #f4623a;">** 사용하실 자리를 더블 클릭 해주세요 ! **</b><br>
+                        =============== 시간당 금액 안내 =============== <br>
+                        - 개인 자유석 : 1,500원<br>
+                        - 그룹석 (2인실: 4,000원 / 4인실: 7,000원 / 6인실: 10,000원)
+                    </p>
+                </div>
+                <div class="seatArr container px-4 px-lg-5">
+                    <div class="selectSeat">
+                        <input type="button" class="col-lg-4 col-sm-6 seats" name="seatNum" value="1">
+                        <input type="button" class="col-lg-4 col-sm-6 seats" name="seatNum" value="2">
+                        <input type="button" class="col-lg-4 col-sm-6 seats" name="seatNum" value="3">
+                        <input type="button" class="col-lg-4 col-sm-6 seats seatsOption" name="seatNum" value="4">
+                        <input type="button" class="col-lg-4 col-sm-6 seats" name="seatNum" value="9">
+                        <input type="button" class="col-lg-4 col-sm-6 seats" name="seatNum" value="10">
+                        <input type="button" class="col-lg-4 col-sm-6 seats" name="seatNum" value="11">
+                        <input type="button" class="col-lg-4 col-sm-6 seats" name="seatNum" value="12">
+                        <input type="button" class="col-lg-4 col-sm-6 seats" name="seatNum" value="5">
+                        <input type="button" class="col-lg-4 col-sm-6 seats" name="seatNum" value="6">
+                        <input type="button" class="col-lg-4 col-sm-6 seats" name="seatNum" value="7">
+                        <input type="button" class="col-lg-4 col-sm-6 seats seatsOption" name="seatNum" value="8">
+                        <input type="button" class="col-lg-4 col-sm-6 seats" name="seatNum" value="13">
+                        <input type="button" class="col-lg-4 col-sm-6 seats" name="seatNum" value="14">
+                        <input type="button" class="col-lg-4 col-sm-6 seats" name="seatNum" value="15">
+                        <input type="button" class="col-lg-4 col-sm-6 seats" name="seatNum" value="16">
+
+                        <div class="col-lg-4 col-sm-6 seats-wall"></div>
+                        <div class="col-lg-4 col-sm-6 seats-wall-2"></div>
+
+                        <input type="button" class="col-lg-4 col-sm-6 seats" name="seatNum" value="17">
+                        <input type="button" class="col-lg-4 col-sm-6 seats" name="seatNum" value="18">
+                        <input type="button" class="col-lg-4 col-sm-6 seats seatsOption-2 occupiedSeat" name="seatNum" value="19">
+                        <input type="button" class="col-lg-4 col-sm-6 seats" name="seatNum" value="20">
+                        <input type="button" class="col-lg-4 col-sm-6 seats occupiedSeat" name="seatNum" value="21">
+                        <input type="button" class="col-lg-4 col-sm-6 seats" name="seatNum" value="22">
+                        <input type="button" class="col-lg-4 col-sm-6 seats" name="seatNum" value="23">
+                        <input type="button" class="col-lg-4 col-sm-6 seats seatsOption-3" name="seatNum" value="24">
+                        <input type="button" class="col-lg-4 col-sm-6 seats" name="seatNum" value="25">
+                        <input type="button" class="col-lg-4 col-sm-6 seats" name="seatNum" value="26">
+                        <input type="button" class="col-lg-4 col-sm-6 seats" name="seatNum" value="27">
+                        <input type="button" class="col-lg-4 col-sm-6 seats" name="seatNum" value="28">
+                        <input type="button" class="col-lg-4 col-sm-6 seats seatsOption-2" name="seatNum" value="29">
+                        <input type="button" class="col-lg-4 col-sm-6 seats" name="seatNum" value="30">
+                        <input type="button" class="col-lg-4 col-sm-6 seats" name="seatNum" value="31">
+                        <input type="button" class="col-lg-4 col-sm-6 seats" name="seatNum" value="32">
+                        <input type="button" class="col-lg-4 col-sm-6 seats" name="seatNum" value="33">
+                        <input type="button" class="col-lg-4 col-sm-6 seats seatsOption-3" name="seatNum" value="34">
+                        <input type="button" class="col-lg-4 col-sm-6 seats" name="seatNum" value="35">
+                        <input type="button" class="col-lg-4 col-sm-6 seats" name="seatNum" value="36">
+
+                        <div class="col-lg-4 col-sm-6 seats-wall"></div>
+                        <div class="col-lg-4 col-sm-6 seats-wall-2"></div>
+                    </div>
+                    <div class="blankSeat"></div>
+                    <div class="selectSeat">
+                        <div class="groupSeatTitle">(2인실)</div>
+                        <input type="button" class="col-lg-4 col-sm-6 groupSeats occupiedSeat" name="groupSeatNum" value="G4">
+                        <input type="button" class="col-lg-4 col-sm-6 groupSeats" name="groupSeatNum" value="G3">
+                        <input type="button" class="col-lg-4 col-sm-6 groupSeats" name="groupSeatNum" value="G2">
+                        <input type="button" class="col-lg-4 col-sm-6 groupSeats groupSeatOption-2" name="groupSeatNum" value="G1">
+                        <div class="groupSeatTitle">(4인실)</div>
+                        <input type="button" class="col-lg-4 col-sm-6 groupSeats" name="groupSeatNum" value="H3">
+                        <input type="button" class="col-lg-4 col-sm-6 groupSeats" name="groupSeatNum" value="H2">
+                        <input type="button" class="col-lg-4 col-sm-6 groupSeats groupSeatOption" name="groupSeatNum" value="H1">
+                        <div class="groupSeatTitle">(6인실)</div>
+                        <input type="button" class="col-lg-4 col-sm-6 groupSeats" name="groupSeatNum" value="P2">
+                        <input type="button" class="col-lg-4 col-sm-6 groupSeats" name="groupSeatNum" value="P1">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 좌석 가격 -->
+        <div class="container px-4 px-lg-5" style="height: 300px;">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-lg-8 col-xl-6 text-center">
+                        <h3 class="mt-0">이용할 시간 선택</h3>
+                        <hr class="divider" /><br>
+                    </div>
+                </div>
+                <div class="seatTimeChoice row gx-4 gx-lg-5 justify-content-center mb-5">
+                    <select class="form-control seatTimeOption" id="selectSeatTime" onchange="selectSeatTime()">
+                        <option value="0">선택 안함</option>
+                        <option value="1">1시간</option>
+                        <option value="2">2시간</option>
+                        <option value="3">3시간</option>
+                        <option value="4">4시간</option>
+                        <option value="5">6시간</option>
+                        <option value="6">8시간</option>
+                        <option value="8">10시간</option>
+                        <option value="10">종일권</option>
+                    </select>
+                    <div class="seatTimeOption2">시간권/금액권 보러가기</div>
+                </div>
+            </div>
+        </div>
+        <!-- 결제 정보 -->
+        <form action="" id="payForm">
+            <input type="hidden" id="timePerPrice" value="0">
+            <input type="hidden" id="seatTotalPrice" value="0">
+            <div class="container px-4 px-lg-5" style="height: 400px;">
+                <div class="container px-4 px-lg-5" style="width: 85%;">
+                    <div class="row gx-4 gx-lg-5 justify-content-center">
+                        <div class="col-lg-8 col-xl-6 text-center">
+                            <h3 class="mt-0">결제 정보</h3>
+                            <hr class="divider" /><br>
+                        </div>
+                    </div>
+                    <div class="seatInfoArr" id="selectedSeat">선택한 자리</div>
+                    <div class="seatInfoArr" id="selectedTime">이용할 시간</div>
+                    <div class="seatInfoArr2" id="selectedTotalPay">결제 금액</div>
+                </div>
+            </div>
+            <!-- 결제 방법 선택 -->
+            <div class="container px-4 px-lg-5" style="height: 150px;">
+                <div class="container px-4 px-lg-5">
+                    <div class="row gx-4 gx-lg-5 justify-content-center">
+                        <div class="col-lg-8 col-xl-6 text-center">
+                            <h3 class="mt-0">결제 방법 선택</h3>
+                            <hr class="divider" /><br>
+                        </div>
+                    </div>
+                    <div class="selectPayment">
+                        <select class="form-control selectPayment2">
+                            <option value="card">카드 결제</option>
+                            <option value="cash">무통장 입금</option>
+                            <option value="membership">회원권 결제</option>
+                        </select>
+                    </div><br><br>
+                    <div class="paySubmit">
+                        <button class="btn btn-primary btn-xl-sb-2" id="submitButton" type="submit">결제 하기</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </section>
+    <br><br><br><br><br><br><br>
+</body>
+<script type="text/javascript" th:src="@{../static/js/custom/choiceSeat.js}"></script>
+<footer th:replace="/layout/footer" />
