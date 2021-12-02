@@ -11377,19 +11377,17 @@ header.masthead h1, header.masthead .h1 {
 }
 .boardSearchBar {
     width: 35%;
+    height: 30px;
     margin: -10px auto 0;
     font-family: "Merriweather Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
-.boardSearchBar>input {
-    height: 40px;
-}
-.boardSearchBar>button, .boardSearchBar>input {
-    font-size: small;
+.boardSearchBar>button{
+    float: right;
 }
 .searchBtn {
     background-color: rgb(151, 151, 151);
     color: white;
-    font-size: small;
+    margin-left: 10px;
 }
 .searchBtn:hover {
     background-color: #f4623a;
@@ -11415,6 +11413,20 @@ header.masthead h1, header.masthead .h1 {
     word-break:break-all;
     border: 1px solid #ffc6b7;
     border-radius: 5px;
+    margin-top: -30px;
+}
+.boardDetail-info {
+    width: 70%;
+}
+.boardDetail-info-1 {
+    float: left;
+    width: 70%;
+    text-align: left;
+}
+.boardDetail-info-2 {
+    float: right;
+    width: 25%;
+    text-align: right;
 }
 .boardBtn {
     float: right;

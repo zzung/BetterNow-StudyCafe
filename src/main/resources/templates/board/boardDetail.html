@@ -1,7 +1,6 @@
 <head>
     <th:block th:replace="/layout/header" />
     <th:block th:replace="/layout/navbar" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous"></head>
 </head>
 <body>
     <!-- board detail -->
@@ -13,40 +12,37 @@
                 <!-- 글 수정 클릭시 이동할 form -->
                 <!-- <form id="boardEditForm" method="POST" action=""> -->
                 <div class="col-lg-8 col-xl-6 text-center" style="margin-bottom: 20px;">
-                    <h4 class="mt-0">제목 test test test test</h4>
+                    <h4 class="mt-0" th:text="${boardDto.boardTitle}">제목</h4>
                     <hr class="divider" />
-                    <h6 class="">john</h6>
-                    <div class="">2021.02.12</div>
+                </div>
+                <div class="row gx-4 gx-lg-5 justify-content-center mb-5 boardDetail-info">
+                    <div class="boardDetail-info-1">
+                        <h6>작성자 | <span th:text="${boardDto.member.memId}"></span></h6>
+                        <p th:inline="text" style="color: #5c636a">작성일 | [[${#temporals.format(boardDto.createDate, 'yyyy-MM-dd HH:mm')}]]</p>
+                    </div>
+                    <div class="boardDetail-info-2">
+                        <p style="color: #5c636a">조회수 |  <span th:text="${boardDto.boardViews}"></span></p>
+                    </div>
                 </div>
                 <div class="row gx-4 gx-lg-5 justify-content-center mb-5 summernoteContents">
-                    <p class="summernoteContent2">
-                        asdfasdf <br>
-                        asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹfasdfasdfasdfasdfasdfaasdfasdfasdfasdfasdfasdf
-                        asdfasdf <br>
-                        asdfasdf <br>
-                        asdfasdf <br>
-                        asdfasdf <br>
-                        asdfasdf <br>sdfasdfasdfasdfasdfasdfasdfasdfassdfasdfasdfasdfasdfasdfasdfasdfassdfasdfasdfasdfasdfasdfasdfasdfassdfasdfasdfasdfasdfasdfasdfasdfassdfasdfasdfasdfasdfasdfasdfasdfas
-                        asdfasdf <br>
-                        asdfasdf <br>
-                        asdfasdf <br>
-                        asdfasdf <br>
-                        asdfasdf <br>
-                        asdfasdf <br>
-                        asdfasdf <br>
-                        asdfasdf <br>
-                        asdfasdf <br>
-                        asdfasdf <br>
-                        asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇ <br>
-                        asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇ
-                        asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇ
-                    </p>
-                    <button class="btn btn-outline-secondary boardBtn" id="boardEdit" type="submit" onclick="location.href='#'">글 수정</button>
-                    <button class="btn btn-outline-secondary boardBtn" id="boardRemove" type="button" onclick="boardRemoveBtn();">글 삭제</button>
-
+                    <p class="summernoteContent2" th:text="${boardDto.boardContent}"></p>
+                    <button class="btn btn-outline-primary boardBtn" id="" type="button" onclick="location.href='/board'">목록 으로</button>
+                        <a th:if="${#strings.equals(boardDto.member.memId, loginUser)}" th:href="@{'/board/edit' + ${boardDto.boardNum}}">
+                            <button class="btn btn-outline-primary boardBtn" id="boardEdit" type="submit">글 수정</button>
+                        </a>
+                        <button th:if="${#strings.equals(boardDto.member.memId, loginUser)}" class="btn btn-primary boardBtn" id="boardRemove" type="button" onclick="boardRemoveBtn();">글 삭제</button>
                 </div>
-
                 <!-- </form> -->
+
+                <!-- 변수 셋팅 -->
+                <script th:inline="javascript">
+                    /*<![CDATA[*/
+                    let boardDto = /*[[${boardDto}]]*/ "";
+                    let loginUser = /*[[${loginUser}]]*/ "";
+                    /*]]>*/
+                    console.log(boardDto.member.memId);
+                    console.log(loginUser);
+                </script>
 
                 <!-- 댓글 영역 -->
                 <!-- <form id="moreViewReply"> -->

@@ -29,9 +29,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/mypage/**").hasRole(Role.MEMBER.name())
                     .antMatchers("/admin/**").hasRole(Role.ADMIN.name()) // 관리자만 접근 가능
                     .antMatchers("/board/write").hasRole(Role.MEMBER.name())
-                    .antMatchers("/board/edit").hasRole(Role.MEMBER.name())
+                    .antMatchers("/board/edit/**").hasRole(Role.MEMBER.name())
                     .antMatchers("/notice/write").hasRole(Role.ADMIN.name())
-                    .antMatchers("/notice/edit").hasRole(Role.ADMIN.name())
+                    .antMatchers("/notice/edit/**").hasRole(Role.ADMIN.name())
                     .anyRequest().permitAll()
                 .and()
                     .formLogin()

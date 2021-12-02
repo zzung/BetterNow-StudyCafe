@@ -7,6 +7,7 @@
     saveReplyBtn.setAttribute("disabled", "true");
     */
 
+
     // 게시글 삭제
     function boardRemoveBtn() {
         if(confirm('확인 클릭시 영구 삭제됩니다. 해당 게시글을 삭제하시겠습니까?')){

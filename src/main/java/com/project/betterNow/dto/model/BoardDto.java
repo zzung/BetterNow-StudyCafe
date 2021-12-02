@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @Data
 @Getter
 @Setter
-public class BoardDto extends BaseTimeEntity {
+public class BoardDto{
 
     @ApiModelProperty(required = true, value = "게시글 번호")
     private Long boardNum;
@@ -34,6 +34,9 @@ public class BoardDto extends BaseTimeEntity {
 
     @ApiModelProperty(required = true, value = "작성자 정보")
     private Member member;
+
+    private LocalDateTime createDate;
+    private LocalDateTime modifyDate;
 
 
     public BoardDto() {
@@ -54,12 +57,15 @@ public class BoardDto extends BaseTimeEntity {
     }
 
     @Builder
-    public BoardDto (Long boardNum, String boardTitle, String boardContent, Member member) {
+    public BoardDto (Long boardNum, String boardTitle, String boardContent, int boardViews, Member member,
+                     LocalDateTime createDate, LocalDateTime modifyDate) {
         this.boardNum = boardNum;
         this.boardTitle = boardTitle;
         this.boardContent = boardContent;
-        this.boardViews = 0;
+        this.boardViews = boardViews;
         this.boardYn = 'Y';
         this.member = member;
+        this.createDate = createDate;
+        this.modifyDate = modifyDate;
     }
 }

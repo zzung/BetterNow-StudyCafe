@@ -1,6 +1,7 @@
 package com.project.betterNow.controller;
 
 import com.google.gson.JsonObject;
+import com.project.betterNow.domain.entity.Member;
 import com.project.betterNow.dto.model.BoardDto;
 import com.project.betterNow.dto.model.MemberDto;
 import com.project.betterNow.service.BoardService;
@@ -9,6 +10,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.io.FileUtils;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -40,22 +42,36 @@ public class BoardController {
     @ApiOperation("게시글 상세 조회")
     @GetMapping("/board/{boardNum}")
     public String boardDetail(@PathVariable("boardNum")Long boardNum, Model model) {
+
+        // 게시글 조회수+1
+        boardService.addViewCount(boardService.getBoardDetail(boardNum).getBoardNum(),
+                boardService.getBoardDetail(boardNum).getBoardViews());
+
+        // 로그인 사용자 정보 가져오기
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String memId = "";
+        if(principal != null) {
+            UserDetails userDetails = (UserDetails) principal;
+            memId = userDetails.getUsername();
+        }
+        model.addAttribute("loginUser", memId);
         model.addAttribute("boardDto", boardService.getBoardDetail(boardNum));
+
         return "/board/boardDetail";
     }
 
     @ApiOperation("게시글 작성 Form")
     @RequestMapping(value = "/board/write", method = RequestMethod.GET)
-    public String postWriteForm(Model model) {
+    public String boardWriteForm(Model model) {
         model.addAttribute("boardDto", new BoardDto());
         return "board/writeForm";
     }
 
     @ApiOperation("게시글 작성")
     @RequestMapping(value = "/board/write", method = RequestMethod.POST)
-    public String postWrite(@ModelAttribute("boardDto") @Valid BoardDto boardDto, Model model){
+    public String boardWrite(@ModelAttribute("boardDto") @Valid BoardDto boardDto, Model model){
 
-        // 사용자 정보 가져오기
+        // 로그인 사용자 정보 가져오기
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserDetails userDetails = (UserDetails) principal;
         String memId = userDetails.getUsername();
@@ -65,6 +81,14 @@ public class BoardController {
 
         return "redirect:/board/" + boardNum;
     }
+
+    @ApiOperation("게시글 수정 Form")
+    @RequestMapping(value = "/board/edit/{boardNum}", method = RequestMethod.GET)
+    public String boardEditForm(@PathVariable Long boardNum, Model model) {
+        model.addAttribute("boardDto", boardService.getBoardDetail(boardNum));
+        return "board/writeForm";
+    }
+
 
 
 

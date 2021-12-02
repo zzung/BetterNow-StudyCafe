@@ -32,7 +32,10 @@ public class BoardService {
                     .boardNum(boardEntity.getBoardNum())
                     .boardTitle(boardEntity.getBoardTitle())
                     .boardContent(boardEntity.getBoardContent())
+                    .boardViews(boardEntity.getBoardViews())
                     .member(boardEntity.getMember())
+                    .createDate(boardEntity.getCreateDate())
+                    .modifyDate(boardEntity.getModifyDate())
                     .build();
 
             boardDtoList.add(boardDTO);
@@ -50,6 +53,10 @@ public class BoardService {
                 .boardNum(boardEntity.getBoardNum())
                 .boardTitle(boardEntity.getBoardTitle())
                 .boardContent(boardEntity.getBoardContent())
+                .boardViews(boardEntity.getBoardViews())
+                .member(boardEntity.getMember())
+                .createDate(boardEntity.getCreateDate())
+                .modifyDate(boardEntity.getModifyDate())
                 .build();
         return boardDto;
     }
@@ -62,8 +69,16 @@ public class BoardService {
         return boardRepository.save(boardDto.toEntity()).getBoardNum();
     }
 
+    // 게시글 조회수 증가
+    @Transactional
+    public int addViewCount(Long boardNum, int boardViews) {
+        return boardRepository.addViewCount(boardNum, boardViews);
+    }
 
-
-
+    // 게시글 수정
+//    @Transactional
+//    public int boardEditForm(Long boardNum){
+//        return
+//    }
 
 }
