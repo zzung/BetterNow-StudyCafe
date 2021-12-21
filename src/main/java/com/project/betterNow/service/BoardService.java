@@ -75,10 +75,10 @@ public class BoardService {
         return boardRepository.addViewCount(boardNum, boardViews);
     }
 
-    // 게시글 수정
-//    @Transactional
-//    public int boardEditForm(Long boardNum){
-//        return
-//    }
+    // 게시글 삭제
+    @Transactional
+    public int deletePost(Long boardNum) {
+        return boardRepository.deletePost(boardNum);
+    }
 
 }

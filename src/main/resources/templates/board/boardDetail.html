@@ -9,31 +9,30 @@
         <div class="container px-4 px-lg-5">
             <!-- 상세 글 -->
             <div class="row gx-4 gx-lg-5 justify-content-center">
-                <!-- 글 수정 클릭시 이동할 form -->
-                <!-- <form id="boardEditForm" method="POST" action=""> -->
                 <div class="col-lg-8 col-xl-6 text-center" style="margin-bottom: 20px;">
                     <h4 class="mt-0" th:text="${boardDto.boardTitle}">제목</h4>
                     <hr class="divider" />
                 </div>
                 <div class="row gx-4 gx-lg-5 justify-content-center mb-5 boardDetail-info">
                     <div class="boardDetail-info-1">
+                        <input type="hidden" name="boardNum" id="boardNum" th:value="${boardDto.boardNum}">
                         <h6>작성자 | <span th:text="${boardDto.member.memId}"></span></h6>
-                        <p th:inline="text" style="color: #5c636a">작성일 | [[${#temporals.format(boardDto.createDate, 'yyyy-MM-dd HH:mm')}]]</p>
+                        <p th:inline="text" style="color: #5c636a">작성일 | [[${#temporals.format(boardDto.modifyDate, 'yyyy-MM-dd HH:mm')}]]</p>
                     </div>
                     <div class="boardDetail-info-2">
                         <p style="color: #5c636a">조회수 |  <span th:text="${boardDto.boardViews}"></span></p>
                     </div>
                 </div>
-                <div class="row gx-4 gx-lg-5 justify-content-center mb-5 summernoteContents">
-                    <p class="summernoteContent2" th:text="${boardDto.boardContent}"></p>
-                    <button class="btn btn-outline-primary boardBtn" id="" type="button" onclick="location.href='/board'">목록 으로</button>
-                        <a th:if="${#strings.equals(boardDto.member.memId, loginUser)}" th:href="@{'/board/edit' + ${boardDto.boardNum}}">
-                            <button class="btn btn-outline-primary boardBtn" id="boardEdit" type="submit">글 수정</button>
+                <div class="row gx-4 gx-lg-5 justify-content-center mb-5 summernoteContents" th:utext="${boardDto.boardContent}"></div>
+                <div class="col-lg-8 col-xl-6 text-center boardDetail-btn">
+                    <button class="btn btn-outline-primary boardBtn" type="button" onclick="location.href='/board'">목록 으로</button>
+                    <span th:if="${#strings.equals(boardDto.member.memId, loginUser)}">
+                        <a th:href="@{'/board/edit/' + ${boardDto.boardNum}}">
+                            <button class="btn btn-outline-primary boardBtn">글 수정</button>
                         </a>
-                        <button th:if="${#strings.equals(boardDto.member.memId, loginUser)}" class="btn btn-primary boardBtn" id="boardRemove" type="button" onclick="boardRemoveBtn();">글 삭제</button>
+                        <button class="btn btn-primary boardBtn" id="boardRemove" type="button" onclick="boardRemoveBtn();">글 삭제</button>
+                    </span>
                 </div>
-                <!-- </form> -->
-
                 <!-- 변수 셋팅 -->
                 <script th:inline="javascript">
                     /*<![CDATA[*/
@@ -45,156 +44,42 @@
                 </script>
 
                 <!-- 댓글 영역 -->
-                <!-- <form id="moreViewReply"> -->
-                <!-- 댓글 갯수 / 댓글 작성란 -->
-                <h4 style="width: 70%; margin-bottom: 10px">댓글 22개</h4>
-                <div class="row gx-4 gx-lg-5  mb-5 replyZone">
-                    <textarea class="form-control inputReply" id="writeReply" placeholder="댓글을 입력해주세요 (500자 까지 작성 가능)" maxlength="500" style="resize: none;"></textarea>
-                    <button class="btn btn-primary saveReply float-right" id="saveReplyBtn" onclick="saveReplyBtn();">작성</button>
-                </div>
-
-                <!-- 댓글 목록 -->
+                <h4 style="width: 70%; margin-bottom: 10px">댓글 <span th:text="${boardReplyCount}"></span> 개</h4>
+<!--                <form th:if="${not #strings.isEmpty(loginUser)}" id="writeReplyForm">-->
+                    <div class="row gx-4 gx-lg-5 mb-5 justify-content-center replyZone">
+                        <input type="hidden" th:name="loginUserId" th:value="${loginUser}" id="loginUserId">
+                        <textarea class="form-control inputReply" th:name="boReplyContent" id="boReplyContent" placeholder="댓글을 입력해주세요 (500자 까지 작성 가능)" maxlength="500" style="resize: none;"></textarea>
+                        <button class="btn btn-primary saveReply float-right" onclick="saveReplyBtn();">작성</button>
+                    </div>
+<!--                </form>-->
                 <div class="row gx-4 gx-lg-5 mb-5 replyList">
-                    <!-- 댓글 없을 때
-                    <h6 class="replyEmptyInfo" style="text-align: center;">
-                        <hr>등록된 댓글이 없습니다.
+                    <!-- 댓글 없을 때 -->
+                    <h6 th:if="${boardReplyList.isEmpty()}" class="replyEmptyInfo" style="text-align: center;">
+                        <hr>댓글이 없습니다. 첫 댓글을 작성해보세요 :)
                     </h6>
-                    -->
-                    <div class="replyEntity">
-                        <input type="hidden" name="replyNum" value="11">
+
+                    <!-- 댓글 목록 -->
+                    <div class="replyEntity" th:each="boardReply : ${boardReplyList}">
+                        <input type="hidden" name="boReplyNum" th:value="${boardReply.boReplyNum}">
                         <hr>
                         <div class="replyImg"><img src="" width="50" height="50"></div>
-                        <div class="replyWriter">TreeTree</div>
-                        <div class="replyDate">2021.06.23
-                            <a href="javascript:void(0);" onclick="replyRemove(this);" class="replyRemove">삭제</a>
-                            <a href="javascript:void(0)" onclick="replyEdit(this);" class="replyEdit">수정</a>
+                        <div class="replyWriter" name="boReplyMember" th:text="${boardReply.member.memId}"></div>
+                        <div class="replyDate">
+                            <span th:inline="text">[[${#temporals.format(boardReply.modifyDate, 'yyyy-MM-dd HH:mm')}]]</span>
+                            <a th:if="${#strings.equals(boardReply.member.memId, loginUser)}"
+                               href="javascript:void(0);" onclick="replyRemove(this);" class="replyRemove">삭제</a>
+                            <a th:if="${#strings.equals(boardReply.member.memId, loginUser)}"
+                               href="javascript:void(0)" onclick="replyEdit(this);" class="replyEdit">수정</a>
                         </div>
-                        <div class="replyContent">
-                            11111111111111111
-                            sdfasdfasdfasdfasdfasdㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇdddddasdfasdfasdfasdfasdfadsfafadfads
-                            asdfasdfasdfasdfasdfasdfasdfasdfa
-                            sdfasdfasdfasdfasdfasdㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇ
-                            asdfasdfasdfasdfasdfasdfasdfasdfa
-                            sdfasdfasdfasdfasdfasdㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇ
-                            asdfasdfasdfasdfasdfasdfasdfasdfa
-                            sdfasdfasdfasdfasdfasdㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇ
-                            sdfasdfasdfasdfasdfasdㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇ
-                            sdfasdfasdfasdfasdfasdㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇ
-                        </div>
+                        <div class="replyContent" th:text="${boardReply.boReplyContent}"></div>
                     </div>
-                    <div class="replyEntity">
-                        <input type="hidden" name="replyNum" value="12">
-                        <hr>
-                        <div class="replyImg"><img src="" width="50" height="50"></div>
-                        <div class="replyWriter">TreeTree</div>
-                        <div class="replyDate">2021.06.23
-                            <a href="javascript:void(0);" onclick="replyRemove(this);" class="replyRemove">삭제</a>
-                            <a href="javascript:void(0)" onclick="replyEdit(this);" class="replyEdit">수정</a>
-                        </div>
-                        <div class="replyContent">
-                            2
-                            sdfasdfasdfasdfasdfasdㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇdddddasdfasdfasdfasdfasdfadsfafadfads
-                            asdfasdfasdfasdfasdfasdfasdfasdfa
-                            sdfasdfasdfasdfasdfasdㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇ
-                            asdfasdfasdfasdfasdfasdfasdfasdfa
-                            sdfasdfasdfasdfasdfasdㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇ
-                            asdfasdfasdfasdfasdfasdfasdfasdfa
-                            sdfasdfasdfasdfasdfasdㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇ
-                        </div>
-                    </div>
-                    <div class="replyEntity">
-                        <input type="hidden" name="replyNum" value="13">
-                        <hr>
-                        <div class="replyImg"><img src="" width="50" height="50"></div>
-                        <div class="replyWriter">TreeTree</div>
-                        <div class="replyDate">2021.06.23
-                            <a href="javascript:void(0);" onclick="replyRemove(this);" class="replyRemove">삭제</a>
-                            <a href="javascript:void(0)" onclick="replyEdit(this);" class="replyEdit">수정</a>
-                        </div>
-                        <div class="replyContent">
-                            3
-                            ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㄲㄲㄲㄲㄲㄲㄲㄱㅉㅉㅈㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴ
-                        </div>
-                    </div>
-                    <div class="replyEntity">
-                        <hr>
-                        <div class="replyImg"><img src="" width="50" height="50"></div>
-                        <div class="replyWriter">TreeTree</div>
-                        <div class="replyDate">2021.06.23</div>
-                        <div class="replyContent">
-                            444sdfasdfasdfasdfasdfasdㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴ
-                        </div>
-                    </div>
-                    <div class="replyEntity">
-                        <hr>
-                        <div class="replyImg"><img src="" width="50" height="50"></div>
-                        <div class="replyWriter">TreeTree</div>
-                        <div class="replyDate">2021.06.23</div>
-                        <div class="replyContent">
-                            5555555 sdfasdfasdfㅁㄴㅈㄷㅎㄴㅎㄱㄹㅁㄴㅇㄹㅇㄹ남ㅇ러미ㅑㄷ힘ㅁㅈ럼ㅇ룽
-                        </div>
-                    </div>
-                    <div class="replyEntity">
-                        <hr>
-                        <div class="replyImg"><img src="" width="50" height="50"></div>
-                        <div class="replyWriter">TreeTree</div>
-                        <div class="replyDate">2021.06.23</div>
-                        <div class="replyContent">
-                            6 sdfasdfasdfㅁㄴㅈㄷㅎㄴㅎㄱㄹㅁㄴㅇㄹㅇㄹ남ㅇ러미ㅑㄷ힘ㅁㅈ럼ㅇ룽
-                        </div>
-                    </div>
-                    <div class="replyEntity">
-                        <hr>
-                        <div class="replyImg"><img src="" width="50" height="50"></div>
-                        <div class="replyWriter">TreeTree</div>
-                        <div class="replyDate">2021.06.23</div>
-                        <div class="replyContent">
-                            7 sdfasdfasdfㅁㄴㅈㄷㅎㄴㅎㄱㄹㅁㄴㅇㄹㅇㄹ남ㅇ러미ㅑㄷ힘ㅁㅈ럼ㅇ룽
-                        </div>
-                    </div>
-                    <div class="replyEntity">
-                        <hr>
-                        <div class="replyImg"><img src="" width="50" height="50"></div>
-                        <div class="replyWriter">TreeTree</div>
-                        <div class="replyDate">2021.06.23</div>
-                        <div class="replyContent">
-                            8 sdfasdfasdfㅁㄴㅈㄷㅎㄴㅎㄱㄹㅁㄴㅇㄹㅇㄹ남ㅇ러미ㅑㄷ힘ㅁㅈ럼ㅇ룽
-                        </div>
-                    </div>
-                    <div class="replyEntity">
-                        <hr>
-                        <div class="replyImg"><img src="" width="50" height="50"></div>
-                        <div class="replyWriter">TreeTree</div>
-                        <div class="replyDate">2021.06.23</div>
-                        <div class="replyContent">
-                            99999 sdfasdfasdfㅁㄴㅈㄷㅎㄴㅎㄱㄹㅁㄴㅇㄹㅇㄹ남ㅇ러미ㅑㄷ힘ㅁㅈ럼ㅇ룽
-                        </div>
-                    </div>
-                    <div class="replyEntity">
-                        <hr>
-                        <div class="replyImg"><img src="" width="50" height="50"></div>
-                        <div class="replyWriter">TreeTree</div>
-                        <div class="replyDate">2021.06.23</div>
-                        <div class="replyContent">
-                            10 sdfasdfasdfㅁㄴㅈㄷㅎㄴㅎㄱㄹㅁㄴㅇㄹㅇㄹ남ㅇ러미ㅑㄷ힘ㅁㅈ럼ㅇ룽
-                        </div>
-                    </div>
-                    <div class="replyEntity">
-                        <hr>
-                        <div class="replyImg"><img src="" width="50" height="50"></div>
-                        <div class="replyWriter">TreeTree</div>
-                        <div class="replyDate">2021.06.23</div>
-                        <div class="replyContent">
-                            11 sdfasdfasdfㅁㄴㅈㄷㅎㄴㅎㄱㄹㅁㄴㅇㄹㅇㄹ남ㅇ러미ㅑㄷ힘ㅁㅈ럼ㅇ룽
-                        </div>
-                    </div>
+
                     <!-- 댓글 더보기 -->
-                    <div class="moreView text-center" id="moreViewArea">
+                    <div th:if="not ${boardReplyList.isEmpty()}" class="moreView text-center" id="moreViewArea">
                         <hr><a href="javascript:void(0);" onclick="moreViewBtn();">댓글 더보기</a>
                     </div>
 
                 </div>
-                <!-- </form> -->
             </div>
         </div>
     </section>

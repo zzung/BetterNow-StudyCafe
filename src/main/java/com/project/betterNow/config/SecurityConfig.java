@@ -27,7 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .authorizeRequests()    //URL별 관리 설정 옵션의 시작점 (antMatchers 옵션을 사용하기 위해 필수 선언)
                     .antMatchers("/member/**").hasRole(Role.MEMBER.name())
                     .antMatchers("/mypage/**").hasRole(Role.MEMBER.name())
-                    .antMatchers("/admin/**").hasRole(Role.ADMIN.name()) // 관리자만 접근 가능
+                    .antMatchers("/admin/**").hasRole(Role.ADMIN.name())
                     .antMatchers("/board/write").hasRole(Role.MEMBER.name())
                     .antMatchers("/board/edit/**").hasRole(Role.MEMBER.name())
                     .antMatchers("/notice/write").hasRole(Role.ADMIN.name())

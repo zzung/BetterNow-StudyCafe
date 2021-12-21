@@ -4,7 +4,10 @@ import com.google.gson.JsonObject;
 import com.project.betterNow.domain.entity.Member;
 import com.project.betterNow.dto.model.BoardDto;
 import com.project.betterNow.dto.model.MemberDto;
+import com.project.betterNow.dto.model.NoticeDto;
+import com.project.betterNow.service.BoardReplyService;
 import com.project.betterNow.service.BoardService;
+import com.project.betterNow.service.NoticeService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +15,9 @@ import org.apache.commons.io.FileUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +28,7 @@ import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Map;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -31,11 +37,14 @@ import java.util.UUID;
 public class BoardController {
 
     private final BoardService boardService;
+    private final NoticeService noticeService;
+    private final BoardReplyService boardReplyService;
 
     @ApiOperation("게시글 목록 조회")
     @GetMapping("/board")
     public String boardList(Model model) {
         model.addAttribute("boardList", boardService.getBoardList());
+        model.addAttribute("noticeList", noticeService.getNoticeList());
         return "/board/boardList";
     }
 
@@ -49,22 +58,35 @@ public class BoardController {
 
         // 로그인 사용자 정보 가져오기
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String memId = "";
-        if(principal != null) {
+        String loginUserId = "";
+
+        if(!principal.equals("anonymousUser")) {
             UserDetails userDetails = (UserDetails) principal;
-            memId = userDetails.getUsername();
+            loginUserId = userDetails.getUsername();
         }
-        model.addAttribute("loginUser", memId);
+        model.addAttribute("loginUser", loginUserId);
         model.addAttribute("boardDto", boardService.getBoardDetail(boardNum));
+
+        // 게시글 댓글 목록 조회
+        model.addAttribute("boardReplyList", boardReplyService.getBoardReplyList(boardNum));
+        // 게시글 댓글 갯수
+        model.addAttribute("boardReplyCount", boardReplyService.getBoardReplyCount(boardNum));
 
         return "/board/boardDetail";
     }
 
     @ApiOperation("게시글 작성 Form")
-    @RequestMapping(value = "/board/write", method = RequestMethod.GET)
-    public String boardWriteForm(Model model) {
-        model.addAttribute("boardDto", new BoardDto());
-        return "board/writeForm";
+    @RequestMapping(value = "/write", method = RequestMethod.GET)
+    public String boardWriteForm(@AuthenticationPrincipal User user, Model model) {
+        if(user != null) {
+            if(user.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
+                model.addAttribute("noticeDto", new NoticeDto());
+                return "notice/writeForm";
+            }
+            model.addAttribute("boardDto", new BoardDto());
+            return "board/writeForm";
+        }
+        return "redirect:/";
     }
 
     @ApiOperation("게시글 작성")
@@ -86,10 +108,26 @@ public class BoardController {
     @RequestMapping(value = "/board/edit/{boardNum}", method = RequestMethod.GET)
     public String boardEditForm(@PathVariable Long boardNum, Model model) {
         model.addAttribute("boardDto", boardService.getBoardDetail(boardNum));
-        return "board/writeForm";
+        return "board/editForm";
     }
 
+    @ApiOperation("게시글 수정")
+    @PutMapping(value = "/board/edit/{boardNum}")
+    public String boardEdit(BoardDto boardDto, String memId) {
+        boardService.savePost(boardDto, memId);
+        return "redirect:/board/" + boardDto.getBoardNum();
+    }
 
+    @ApiOperation("게시글 삭제 - 게시글 상태:N")
+    @RequestMapping(value = "/board/delete/{boardNum}", method = RequestMethod.POST)
+    @ResponseBody
+    public int boardDelete( @PathVariable Long boardNum) {
+        int result = 0;
+        if(boardService.deletePost(boardNum)>0) {
+            result++;
+        }
+        return result;
+    }
 
 
 }

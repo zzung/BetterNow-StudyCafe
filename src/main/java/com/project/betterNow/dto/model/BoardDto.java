@@ -1,6 +1,5 @@
 package com.project.betterNow.dto.model;
 
-import com.project.betterNow.domain.entity.BaseTimeEntity;
 import com.project.betterNow.domain.entity.Board;
 import com.project.betterNow.domain.entity.Member;
 import io.swagger.annotations.ApiModelProperty;
@@ -8,8 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDateTime;
 
 @Data
@@ -35,19 +34,19 @@ public class BoardDto{
     @ApiModelProperty(required = true, value = "작성자 정보")
     private Member member;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime createDate;
     private LocalDateTime modifyDate;
 
 
-    public BoardDto() {
-
-    }
+    public BoardDto() {}
 
     public Board toEntity() {
         return Board.builder()
                 .boardNum(boardNum)
                 .boardTitle(boardTitle)
                 .boardContent(boardContent)
+                .boardViews(boardViews)
                 .member(member)
                 .build();
     }

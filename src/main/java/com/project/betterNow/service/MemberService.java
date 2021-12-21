@@ -67,7 +67,6 @@ public class MemberService implements UserDetailsService {
         }
 
         throw new UsernameNotFoundException(username);
-
     }
 
     // 아이디 찾기
@@ -94,11 +93,12 @@ public class MemberService implements UserDetailsService {
         return memberRepository.updateMemPwd(encoderPwd, memId);
     }
 
-    // memNum 찾기
-    public Long findMemNum(String memId) {
-        Optional<Member> memberWrapper = memberRepository.findByMemId(memId);
+    // memId로 Member 찾기
+    public Member findByMemId(String memId) {
+        Optional<Member> memberWrapper =  memberRepository.findByMemId(memId);
         if(memberWrapper.isPresent()) {
-            return memberWrapper.get().getMemNum();
+            Member member = memberWrapper.get();
+            return member;
         }
         return null;
     }
