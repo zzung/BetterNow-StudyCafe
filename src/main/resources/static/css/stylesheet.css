@@ -11443,7 +11443,7 @@ header.masthead h1, header.masthead .h1 {
 }
 .inputReply {
     width: 85%;
-    height: 100px;
+        height: 100px;
     /*float: left;*/
     font-size: small;
     margin-left: 20px;

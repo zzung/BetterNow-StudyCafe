@@ -1,9 +1,6 @@
 package com.project.betterNow.controller;
 
-import com.project.betterNow.domain.entity.BoardReply;
-import com.project.betterNow.domain.entity.Member;
 import com.project.betterNow.service.BoardReplyService;
-import com.project.betterNow.service.MemberService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -46,5 +43,8 @@ public class BoardReplyController {
         }
         return result;
     }
+
+
+
 
 }

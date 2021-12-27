@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface NoticeRepository extends JpaRepository<Notice, Long> {
 
@@ -16,6 +17,9 @@ public interface NoticeRepository extends JpaRepository<Notice, Long> {
     @Query("UPDATE Notice n SET n.noticeViews = :noticeViews+1 WHERE n.noticeNum = :noticeNum")
     int addViewCount(Long noticeNum, int noticeViews);
 
+    Optional<Notice> findByNoticeNum(Long noticeNum);
 
+    @Query("UPDATE Notice n SET n.noticeYn = 'N' WHERE n.noticeNum = :noticeNum")
+    int deletePost(Long noticeNum);
 
 }

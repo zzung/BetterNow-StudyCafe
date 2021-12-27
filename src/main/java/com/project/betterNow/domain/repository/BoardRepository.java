@@ -22,4 +22,6 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
     @Modifying(clearAutomatically = true)
     @Query("UPDATE Board b SET b.boardYn = 'N' WHERE b.boardNum = :boardNum")
     int deletePost(Long boardNum);
+
+    List<Board> findByBoardTitleContaining(String keyword);
 }

@@ -81,4 +81,29 @@ public class BoardService {
         return boardRepository.deletePost(boardNum);
     }
 
+    // 게시글 검색 기능
+    public List<BoardDto> getSearchList(String keyword) {
+        List<Board> boardList = boardRepository.findByBoardTitleContaining(keyword);
+        List<BoardDto> boardDtoList = new ArrayList<>();
+
+        if(boardList.isEmpty()) { return boardDtoList; }
+
+        for(Board b : boardList) {
+            boardDtoList.add(this.convertEntityToDto(b));
+        }
+        return boardDtoList;
+    }
+
+    private BoardDto convertEntityToDto(Board board) {
+        return BoardDto.builder()
+                .boardNum(board.getBoardNum())
+                .boardTitle(board.getBoardTitle())
+                .boardContent(board.getBoardContent())
+                .member(board.getMember())
+                .boardViews(board.getBoardViews())
+                .createDate(board.getCreateDate())
+                .modifyDate(board.getModifyDate())
+                .build();
+    }
+
 }

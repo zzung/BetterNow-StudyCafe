@@ -24,16 +24,6 @@
         }
     }
 
-
-    // 로그인 전 상태일 경우 (댓글 영역 제한)
-    // window.onload = function () {
-    //     const writeReplyArea = document.getElementById('boReplyContent');
-    //     writeReplyArea.setAttribute("disabled", "true");
-    //     writeReplyArea.setAttribute("placeholder", "댓글 작성은 로그인 후 이용 가능합니다.");
-    //     const saveReplyBtn = document.getElementById('saveReplyBtn');
-    //     saveReplyBtn.setAttribute("disabled", "true");
-    // };
-
     // 댓글 작성 ajax
     function saveReplyBtn() {
         let loginUserId = document.getElementById('loginUserId').value;
@@ -66,7 +56,7 @@
                 }
             });
         }
-}
+    }
 
     // *** a 태그 href가 아닌 onclick 사용시 차이점 : https://thingsthis.tistory.com/130
     // *** 수정 클릭시 textarea 보이기 : https://cloudstudying.kr/lectures/458
@@ -99,9 +89,6 @@
                     console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
                 }
             });
-            //
-            // $(obj).parent().parent().remove();
-            // alert("댓글이 삭제되었습니다.");
         }
     }
 

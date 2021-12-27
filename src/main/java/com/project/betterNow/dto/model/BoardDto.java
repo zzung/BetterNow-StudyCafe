@@ -38,6 +38,9 @@ public class BoardDto{
     private LocalDateTime createDate;
     private LocalDateTime modifyDate;
 
+    // 검색 필터
+    private String keyword;
+
 
     public BoardDto() {}
 

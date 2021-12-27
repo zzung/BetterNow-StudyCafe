@@ -14,16 +14,18 @@
                     <hr class="divider" />
                 </div>
                 <div class="row gx-4 gx-lg-5 justify-content-center mb-5" style="margin-top: 50px;">
-                    <div class="input-group mb-5 boardSearchBar">
-                        <input type="text" class="form-control" placeholder="검색어를 입력해주세요">
-                        <div class="input-group-append">
-                            <button class="btn searchBtn" type="submit">Go</button>
+                    <form name="search-form" autocomplete="off">
+                        <div class="input-group mb-5 boardSearchBar">
+                            <input type="text" id="keyword" name="keyword" class="form-control" placeholder="검색어를 입력해주세요">
+                            <div class="input-group-append">
+                                <button class="btn searchBtn" type="button" onclick="getSearchList();">Go</button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                     <div sec:authorize="isAuthenticated()" class="boardSearchBar">
                         <button class="btn btn-primary" type="button" onclick="location.href='/write'">글쓰기</button>
                     </div>
-                    <table class="table table-striped boardTable">
+                    <table id="boardTable" class="table table-striped boardTable">
                         <thead>
                             <tr>
                                 <th>No.</th>
@@ -33,7 +35,7 @@
                                 <th>조회수</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="boardListBody">
                             <!-- 공지사항 -->
                             <tr th:each="notice : ${noticeList}">
                                 <input type="hidden" name="noticeNum" th:value="${notice.noticeNum}">
