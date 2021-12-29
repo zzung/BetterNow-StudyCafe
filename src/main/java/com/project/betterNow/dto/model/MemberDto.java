@@ -53,6 +53,10 @@ public class MemberDto implements UserDetails, Serializable {
      private Role role;
      */
 
+    // 검색 필터
+    private String keyword;
+
+
     public Member toEntity() {
         return Member.builder()
                 .memId(memId)

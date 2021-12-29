@@ -69,7 +69,6 @@
     function replyRemove(obj) {
         let boardNum = document.getElementById("boardNum").value;
         let boReplyNum = $(obj).parent().parent().children("input[name=boReplyNum]").val();
-        console.log(boReplyNum);
 
         if(confirm("삭제시 복구가 불가능합니다. 댓글을 삭제하시겠습니까?")){
             $.ajax({

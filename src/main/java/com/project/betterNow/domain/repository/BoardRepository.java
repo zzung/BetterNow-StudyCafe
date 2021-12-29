@@ -1,6 +1,7 @@
 package com.project.betterNow.domain.repository;
 
 import com.project.betterNow.domain.entity.Board;
+import com.project.betterNow.domain.entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -23,5 +24,8 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
     @Query("UPDATE Board b SET b.boardYn = 'N' WHERE b.boardNum = :boardNum")
     int deletePost(Long boardNum);
 
-    List<Board> findByBoardTitleContaining(String keyword);
+    List<Board> findByBoardTitleContainingOrderByBoardNumDesc(String keyword);
+    List<Board> findByMemberMemIdContainingOrderByBoardNumDesc(String memId);
+
+
 }

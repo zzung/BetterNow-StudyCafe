@@ -83,14 +83,20 @@ public class BoardService {
 
     // 게시글 검색 기능
     public List<BoardDto> getSearchList(String keyword) {
-        List<Board> boardList = boardRepository.findByBoardTitleContaining(keyword);
+        // keyword - title or memId 찾기
+        List<Board> boardList = boardRepository.findByBoardTitleContainingOrderByBoardNumDesc(keyword);
+        List<Board> boardListByMemId = boardRepository.findByMemberMemIdContainingOrderByBoardNumDesc(keyword);
         List<BoardDto> boardDtoList = new ArrayList<>();
 
-        if(boardList.isEmpty()) { return boardDtoList; }
+        if(boardList.isEmpty() && boardListByMemId.isEmpty()) { return boardDtoList; }
 
         for(Board b : boardList) {
             boardDtoList.add(this.convertEntityToDto(b));
         }
+        for(Board b2 : boardListByMemId) {
+            boardDtoList.add(this.convertEntityToDto(b2));
+        }
+
         return boardDtoList;
     }
 
@@ -105,5 +111,6 @@ public class BoardService {
                 .modifyDate(board.getModifyDate())
                 .build();
     }
+
 
 }

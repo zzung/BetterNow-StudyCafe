@@ -7,6 +7,7 @@ import com.project.betterNow.dto.model.MemberDto;
 import com.project.betterNow.dto.model.NoticeDto;
 import com.project.betterNow.service.BoardReplyService;
 import com.project.betterNow.service.BoardService;
+import com.project.betterNow.service.MemberService;
 import com.project.betterNow.service.NoticeService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -28,6 +29,7 @@ import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -40,6 +42,7 @@ public class BoardController {
     private final BoardService boardService;
     private final NoticeService noticeService;
     private final BoardReplyService boardReplyService;
+    private final MemberService memberService;
 
     @ApiOperation("게시글 목록 조회")
     @GetMapping("/board")
@@ -133,8 +136,10 @@ public class BoardController {
     @ApiOperation("게시글 검색 기능")
     @RequestMapping(value = "/board/getSearchList", method = RequestMethod.GET)
     @ResponseBody
-    public List<BoardDto> getSearchList(@RequestParam("keyword") String keyword, Model model) throws Exception{
-        return boardService.getSearchList(keyword);
+    public List<BoardDto> getSearchList(@RequestParam("keyword") String keyword){
+        List<BoardDto> searchResult = new ArrayList<>();
+        searchResult = boardService.getSearchList(keyword);
+        return searchResult;
     }
 
 

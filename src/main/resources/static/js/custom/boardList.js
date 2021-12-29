@@ -45,11 +45,10 @@
         }
     }
 
-    $("document").ready(function(){
-        paging(totalData, dataPerPage, pageCount, 1);
-    });
+    // $("document").ready(function(){
+    //     paging(totalData, dataPerPage, pageCount, 1);
+    // });
 
-현
     // // Search bar - 검색 기능
     // function boardSearchBar(){
     //     console.log("클릭");
@@ -70,26 +69,29 @@
             url : "/board/getSearchList",
             data : $("form[name=search-form]").serialize(),
             success : function(result){
-                console.log("서치 기능 성공, result : "+result);
 
                 //테이블 초기화
                 $('#boardTable > tbody').empty();
-                if(result.length>=1){
-                    result.forEach(function(item){
 
+                if(result.length >= 1){
+                    result.forEach(function(item){
                         str='<tr>'
-                        str += "<td><span th:text="+ item.boardNum +"></span></td>";
-                        str += "<td><a th:href=\"@{'/board/"+ item.boardNum + "'}\" style=\"text-decoration: none; color: black;\">\n" +
-                                    "<span th:text="+ item.boardTitle +" id=\"boardTitleHover\"></span></a></td>";
-                        str += "<td><span th:text="+ item.member.memId +"></span></td>";
-                        // str += "<td><span th:inline=\"text\">[[${#temporals.format("+ item.modifyDate.date + ", 'yyyy-MM-dd HH:mm')}]]</span></td>";
-                        str += "<td><span>2021.12.09 11:12:34</span></td>"
-                        str += "<td><span th:text="+ item.boardViews +"></span></td>";
+                        str += "<td><span>"+ item.boardNum +"</span></td>";
+                        str += "<td><a href='/board/"+ item.boardNum + "' style=\"text-decoration: none; color: black;\">\n" +
+                                    "<span id=\"boardTitleHover\">"+ item.boardTitle +"</span></a></td>";
+                        str += "<td><span>" + item.member.memId + "</span></td>";
+                        str += "<td><span>"+ item.modifyDate.date.year +"-"+ item.modifyDate.date.month +"-"+ item.modifyDate.date.day +" "+ item.modifyDate.time.hour +":"+ item.modifyDate.time.minute +"</span></td>"
+                        str += "<td><span>" + item.boardViews + "</span></td>";
                         str += "</tr>"
 
                         $('#boardListBody').append(str);
                     })
                 }
+                if (result.length == 0){
+                    str = "<tr><td colspan='5'>검색 결과가 없습니다. </td></tr>"
+                    $('#boardListBody').append(str);
+                }
+
             }
         })
     }
