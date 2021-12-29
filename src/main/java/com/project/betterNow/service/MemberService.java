@@ -6,7 +6,6 @@ import com.project.betterNow.domain.entity.Role;
 import com.project.betterNow.domain.repository.AdminRepository;
 import com.project.betterNow.domain.repository.MemberRepository;
 import com.project.betterNow.dto.model.MemberDto;
-import com.project.betterNow.dto.request.SignupRq;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -102,4 +101,6 @@ public class MemberService implements UserDetailsService {
         }
         return null;
     }
+
+
 }

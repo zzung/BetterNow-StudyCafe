@@ -78,7 +78,7 @@ public class NoticeController {
         return "redirect:/notice/" + noticeDto.getNoticeNum();
     }
 
-    @ApiOperation("게시글 삭제 - 게시글 상태:N")
+    @ApiOperation("공지사항 삭제 - 상태:N")
     @RequestMapping(value = "/notice/delete/{noticeNum}", method = RequestMethod.POST)
     @ResponseBody
     public int noticeDelte( @PathVariable Long noticeNum) {
