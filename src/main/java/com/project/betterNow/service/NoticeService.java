@@ -1,9 +1,11 @@
 package com.project.betterNow.service;
 
 import com.project.betterNow.domain.entity.Admin;
+import com.project.betterNow.domain.entity.Board;
 import com.project.betterNow.domain.entity.Notice;
 import com.project.betterNow.domain.repository.AdminRepository;
 import com.project.betterNow.domain.repository.NoticeRepository;
+import com.project.betterNow.dto.model.BoardDto;
 import com.project.betterNow.dto.model.NoticeDto;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -79,4 +81,36 @@ public class NoticeService {
     public int deletePost(Long noticeNum) {
         return noticeRepository.deletePost(noticeNum);
     }
+
+    // 게시글 검색 기능
+    public List<NoticeDto> getSearchList(String keyword) {
+        // keyword - title or adminId 찾기
+        List<Notice> noticeList = noticeRepository.findByNoticeTitleContainingOrderByNoticeNumDesc(keyword);
+        List<Notice> noticeListByAdminId = noticeRepository.findByAdminAdminIdContainingOrderByNoticeNumDesc(keyword);
+        List<NoticeDto> noticeDtoList = new ArrayList<>();
+
+        if(noticeList.isEmpty() && noticeListByAdminId.isEmpty()) { return noticeDtoList; }
+
+        for(Notice n : noticeList) {
+            noticeDtoList.add(this.convertEntityToDto(n));
+        }
+        for(Notice n2 : noticeListByAdminId) {
+            noticeDtoList.add(this.convertEntityToDto(n2));
+        }
+
+        return noticeDtoList;
+    }
+
+    private NoticeDto convertEntityToDto(Notice notice) {
+        return NoticeDto.builder()
+                .noticeNum(notice.getNoticeNum())
+                .noticeTitle(notice.getNoticeTitle())
+                .noticeContent(notice.getNoticeContent())
+                .admin(notice.getAdmin())
+                .noticeViews(notice.getNoticeViews())
+                .createDate(notice.getCreateDate())
+                .modifyDate(notice.getModifyDate())
+                .build();
+    }
+
 }

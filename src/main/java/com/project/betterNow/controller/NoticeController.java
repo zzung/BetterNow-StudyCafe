@@ -16,6 +16,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Controller
@@ -88,5 +90,15 @@ public class NoticeController {
         }
         return result;
     }
+
+    @ApiOperation("게시글-공지사항 검색 기능")
+    @RequestMapping(value = "/notice/getSearchList", method = RequestMethod.GET)
+    @ResponseBody
+    public List<NoticeDto> getSearchList(@RequestParam("keyword") String keyword){
+        List<NoticeDto> searchResult = new ArrayList<>();
+        searchResult = noticeService.getSearchList(keyword);
+        return searchResult;
+    }
+
 
 }

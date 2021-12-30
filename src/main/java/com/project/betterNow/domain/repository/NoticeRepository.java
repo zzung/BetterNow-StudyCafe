@@ -22,4 +22,7 @@ public interface NoticeRepository extends JpaRepository<Notice, Long> {
     @Query("UPDATE Notice n SET n.noticeYn = 'N' WHERE n.noticeNum = :noticeNum")
     int deletePost(Long noticeNum);
 
+    List<Notice> findByNoticeTitleContainingOrderByNoticeNumDesc(String keyword);
+    List<Notice> findByAdminAdminIdContainingOrderByNoticeNumDesc(String keyword);
+
 }
