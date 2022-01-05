@@ -19,4 +19,7 @@ public interface BoardReplyRepository extends JpaRepository<BoardReply, Long> {
     @Query("UPDATE BoardReply b SET b.boReplyYn = 'N' WHERE b.boReplyNum = :boReplyNum")
     int deleteBoardReply(Long boReplyNum);
 
+    @Modifying(clearAutomatically = true)
+    @Query("UPDATE BoardReply b SET b.boReplyContent = :boReplyContent WHERE b.boReplyNum = :boReplyNum and b.board.boardNum = :boardNum")
+    int updateBoardReply(Long boReplyNum, Long boardNum, String boReplyContent);
 }

@@ -61,7 +61,7 @@ public class BoardService {
         return boardDto;
     }
 
-    // 게시글 저장
+    // 게시글 저장 or 수정
     @Transactional
     public Long savePost(BoardDto boardDto, String memId) {
         Member member = memberRepository.findByMemId(memId).get();

@@ -44,7 +44,25 @@ public class BoardReplyController {
         return result;
     }
 
+    @ApiOperation("게시글 댓글 수정 ajax")
+    @RequestMapping(value = "/board/reply/edit/{boReplyNum}", method = RequestMethod.POST)
+    @ResponseBody
+    public int updateBoardReply(@RequestParam Map<String, Object> param) {
 
+        Long boReplyNum = Long.valueOf(String.valueOf(param.get("boReplyNum")));
+        Long boardNum = Long.valueOf(String.valueOf(param.get("boardNum")));
+        String boReplyContent = (String) param.get("boReplyContent");
+        String memId = (String) param.get("boReplyMemId");
+
+        // 로그인 유저랑 작성자 일치하는지 비교
+        // 수정 후 modify date 업데이트 
+
+        int result = 0;
+        if(boardReplyService.updateBoardReply(boReplyNum, boardNum, boReplyContent) > 0) {
+            result++;
+        }
+        return result;
+    }
 
 
 }

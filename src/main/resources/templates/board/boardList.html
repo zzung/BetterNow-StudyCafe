@@ -14,16 +14,18 @@
                     <hr class="divider" />
                 </div>
                 <div class="row gx-4 gx-lg-5 justify-content-center mb-5" style="margin-top: 50px;">
-                    <form name="search-form" autocomplete="off">
-                        <div class="input-group mb-5 boardSearchBar">
-                            <input type="text" id="keyword" name="keyword" class="form-control" placeholder="검색어를 입력해주세요">
-                            <div class="input-group-append">
-                                <button class="btn searchBtn" type="button" onclick="getSearchList();">Go</button>
+                    <div class="boardSearchZone">
+                        <form name="search-form" autocomplete="off" class="boardSearch-1 justify-content-center row gx-4 gx-lg-5 mb-5">
+                            <div class="input-group mb-5">
+                                <input type="text" id="keyword" name="keyword" class="form-control" placeholder="검색어를 입력해주세요">
+                                <div class="input-group-append">
+                                    <button class="btn searchBtn" type="button" onclick="getSearchList();">Go</button>
+                                </div>
                             </div>
+                        </form>
+                        <div sec:authorize="isAuthenticated()" class="boardSearch-2 ">
+                            <button class="btn btn-primary" type="button" onclick="location.href='/write'">글쓰기</button>
                         </div>
-                    </form>
-                    <div sec:authorize="isAuthenticated()" class="boardSearchBar">
-                        <button class="btn btn-primary" type="button" onclick="location.href='/write'">글쓰기</button>
                     </div>
                     <table id="boardTable" class="table table-striped boardTable">
                         <thead>

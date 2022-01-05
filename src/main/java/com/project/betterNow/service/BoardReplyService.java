@@ -43,7 +43,7 @@ public class BoardReplyService {
         return boardReplyDtoList;
     }
 
-    // 댓글 저장
+     // 댓글 저장
     @Transactional
     public Long boardReplyWrite(Long boardNum, String loginUserId, String boReplyContent) {
         Member memberEntity = memberRepository.findByMemId(loginUserId).get();
@@ -66,6 +66,12 @@ public class BoardReplyService {
     @Transactional
     public int deleteBoardReply(Long boReplyNum) {
         return boardReplyRepository.deleteBoardReply(boReplyNum);
+    }
+
+    // 댓글 수정
+    @Transactional
+    public int updateBoardReply(Long boReplyNum, Long boardNum, String boReplyContent) {
+        return boardReplyRepository.updateBoardReply(boReplyNum, boardNum, boReplyContent);
     }
 
 

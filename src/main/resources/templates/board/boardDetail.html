@@ -59,13 +59,14 @@
                         <div class="replyImg"><img src="" width="50" height="50"></div>
                         <div class="replyWriter" name="boReplyMember" th:text="${boardReply.member.memId}"></div>
                         <div class="replyDate">
-                            <span th:inline="text">[[${#temporals.format(boardReply.modifyDate, 'yyyy-MM-dd HH:mm')}]]</span>
+                            <span th:inline="text" class="replyModifyDate">[[${#temporals.format(boardReply.modifyDate, 'yyyy-MM-dd HH:mm')}]]</span>
                             <a th:if="${#strings.equals(boardReply.member.memId, loginUser)}"
                                href="javascript:void(0);" onclick="replyRemove(this);" class="replyRemove">삭제</a>
-                            <a th:if="${#strings.equals(boardReply.member.memId, loginUser)}"
-                               href="javascript:void(0)" onclick="replyEdit(this);" class="replyEdit">수정</a>
+<!--                            <a th:if="${#strings.equals(boardReply.member.memId, loginUser)}"-->
+                            <a href="javascript:void(0)" onclick="replyEdit(this);" class="replyEdit">수정</a>
                         </div>
-                        <div class="replyContent" th:text="${boardReply.boReplyContent}"></div>
+                        <div class="replyContent" name="boReplyContent" th:text="${boardReply.boReplyContent}"></div>
+                        <div name="originalReplyContent" style="display: none"></div>
                     </div>
 
                     <!-- 댓글 더보기 -->

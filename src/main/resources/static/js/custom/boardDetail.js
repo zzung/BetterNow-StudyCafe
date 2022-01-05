@@ -1,3 +1,4 @@
+
     // 게시글 삭제
     function boardRemoveBtn() {
         let boardNum = document.getElementById("boardNum").value;
@@ -23,6 +24,7 @@
 
         }
     }
+
 
     // 댓글 작성 ajax
     function saveReplyBtn() {
@@ -58,12 +60,93 @@
         }
     }
 
-    // *** a 태그 href가 아닌 onclick 사용시 차이점 : https://thingsthis.tistory.com/130
-    // *** 수정 클릭시 textarea 보이기 : https://cloudstudying.kr/lectures/458
+
     // 댓글 수정
-    // function replyEdit(obj) {
-    //     let replyNum = $(obj).parent().parent().children("input[name=replyNum]").val();
-    // }
+    function replyEdit(obj) {
+        let boReplyNum = $(obj).parent().parent().children("input[name=boReplyNum]").val();
+        let boReplyOriginalContent = $(obj).parent().parent().children('div:eq(3)').text();
+        let boReplyWriter = $(obj).parent().parent().children('div:eq(1)').text();
+        let boReplyDate = $(obj).parent().parent().children('div:eq(2)').children('.replyModifyDate').text();
+
+
+        let str = "";
+        str += '<div class=\"replyEntity\">';
+        str += '<input type=\"hidden\" name=\"boReplyNum\" value='+ boReplyNum +'>';
+        str += '<hr>';
+        str += '<div class=\"replyImg\"><img src=\"\" width=\"50\" height=\"50\"></div>';
+        str += '<div class=\"replyWriter\" name=\"boReplyMember\">'+ boReplyWriter +'</div>';
+        str += '<div class=\"replyDate\">';
+        str += '<span class=\"replyModifyDate\">'+ boReplyDate +'</span>';
+        str += '<a href=\"javascript:void(0);\" onclick=\"replyEditUndo(this);\" class=\"replyRemove\">취소</a>';
+        str += '<a href=\"javascript:void(0);\" onclick=\"replyEditSave(this);\" class=\"replyEdit\">저장</a>';
+        str += '</div>';
+        str += '<textarea class=\"form-control edit-reply\" name=\"boReplyContent\" id=\"editContent\" placeholder=\"수정할 내용을 입력해주세요. (500자 까지 작성 가능)\" maxlength=\"500\" style=\"resize: none;\">'+ boReplyOriginalContent+'</textarea>';
+        str += '<div name=\"originalReplyContent\" style=\"display: none\">'+ boReplyOriginalContent +'</div>';
+        str += '</div>';
+
+        $(obj).parent().parent().replaceWith(str);
+        $('#editContent').focus();
+
+    }
+
+    // 댓글 수정 - 취소 클릭시
+    function replyEditUndo(obj) {
+        let boReplyNum = $(obj).parent().parent().children("input[name=boReplyNum]").val();
+        let boReplyOriginalContent = $(obj).parent().parent().children('div:eq(3)').text();
+        let boReplyWriter = $(obj).parent().parent().children('div:eq(1)').text();
+        let boReplyDate = $(obj).parent().parent().children('div:eq(2)').children('.replyModifyDate').text();
+
+
+        let str = "";
+        str += '<div class=\"replyEntity\">';
+        str += '<input type=\"hidden\" name=\"boReplyNum\" value='+ boReplyNum +'>';
+        str += '<hr>';
+        str += '<div class=\"replyImg\"><img src=\"\" width=\"50\" height=\"50\"></div>';
+        str += '<div class=\"replyWriter\" name=\"boReplyMember\">'+ boReplyWriter +'</div>';
+        str += '<div class=\"replyDate\">';
+        str += '<span class=\"replyModifyDate\">'+ boReplyDate +'</span>';
+        str += '<a href=\"javascript:void(0);\" onclick=\"replyRemove(this);\" class=\"replyRemove\">삭제</a>';
+        str += '<a href=\"javascript:void(0);\" onclick=\"replyEdit(this);\" class=\"replyEdit\">수정</a>';
+        str += '</div>';
+        str += '<div class=\"replyContent\" name=\"boReplyContent\">'+ boReplyOriginalContent +'</div>';
+        str += '<div name=\"originalReplyContent\" style=\"display: none\">'+ boReplyOriginalContent +'</div>';
+        str += '</div>';
+
+        $(obj).parent().parent().replaceWith(str);
+    }
+
+    // 댓글 수정 - 저장 클릭시
+    function replyEditSave(obj) {
+        let boardNum = $('#boardNum').val();
+        let boReplyNum = $(obj).parent().parent().children("input[name=boReplyNum]").val();
+        let boReplyWriter = $(obj).parent().parent().children('div:eq(1)').text();
+        let newContent = $("textarea#editContent").val();
+
+        if(confirm("댓글을 수정 하시겠습니까?")) {
+            $.ajax({
+                url: "/board/reply/edit/"+boReplyNum,
+                type: "POST",
+                data: { 'boReplyNum' : boReplyNum,
+                    'boReplyContent' : newContent,
+                    'boReplyMemId' : boReplyWriter,
+                    'boardNum' : boardNum
+                },
+                success: function (result) {
+                    if(result > 0){ // 댓글 수정 저장 성공
+                        alert("댓글이 수정되었습니다. :)");
+                    }
+                    if(result == 0) { // 댓글 수정 저장 실패
+                        alert("댓글 수정 오류 ! 다시 시도해주세요.");
+                    }
+                    location.href = '/board/' + boardNum;
+
+                },error: function(request,status,error){
+                    console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+                }
+            });
+        }
+    }
+
 
     // 댓글 삭제
     function replyRemove(obj) {

@@ -34,8 +34,8 @@
                     </span>
             </div>
                 <!-- 댓글 영역 -->
-                <h4 style="width: 70%; margin-bottom: 10px">댓글 <span th:text="${noticeReplyCount}"></span> 개</h4>
-                <form th:if="${not #strings.isEmpty(loginUser)}" id="writeReplyForm">
+                <h4 style="width: 70%;">댓글 <span th:text="${noticeReplyCount}"></span> 개</h4>
+                <form th:if="${not #strings.isEmpty(loginUser)}" id="writeReplyForm" class="justify-content-center row gx-4 gx-lg-5 mb-5 ">
                     <div class="row gx-4 gx-lg-5 mb-5 justify-content-center replyZone">
                         <input type="hidden" th:name="loginUserId" th:value="${loginUser}" id="loginUserId">
                         <textarea class="form-control inputReply" th:name="noReplyContent" id="noReplyContent" placeholder="댓글을 입력해주세요 (500자 까지 작성 가능)" maxlength="500" style="resize: none;"></textarea>
@@ -68,7 +68,6 @@
                     <div th:if="not ${noticeReplyList.isEmpty()}" class="moreView text-center" id="moreViewArea">
                         <hr><a href="javascript:void(0);" onclick="moreViewBtn();">댓글 더보기</a>
                     </div>
-
                 </div>
 
             </div>

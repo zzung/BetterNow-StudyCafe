@@ -22,7 +22,6 @@
       <div class="row gx-4 gx-lg-5 justify-content-center" style="height: 800px;">
         <div class="col-lg-8 col-xl-6 text-center" style="margin-bottom: 20px;">
           <h2 class="mt-0">글 쓰기</h2>
-          <!-- <h2 class="mt-0">글 수정</h2> -->
           <hr class="divider" />
         </div>
         <div class="row gx-4 gx-lg-5 justify-content-center mb-5 summernoteArea">
@@ -33,7 +32,7 @@
               <textarea th:field="*{boardContent}" class="form-control summernote" id="boardContent" name="boardContent"></textarea>
             </div>
             <div class="writeBoardBtns">
-              <button class="btn btn-secondary" id="undoBtn" type="reset">뒤로가기</button>
+              <button class="btn btn-secondary" id="undoBtn" type="reset" onclick="location.href='/board'">뒤로가기</button>
               <button class="btn btn-primary" id="saveBtn" type="submit">작성하기</button>
             </div>
           </form>
