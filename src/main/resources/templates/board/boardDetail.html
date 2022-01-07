@@ -59,7 +59,7 @@
                         <div class="replyImg"><img src="" width="50" height="50"></div>
                         <div class="replyWriter" name="boReplyMember" th:text="${boardReply.member.memId}"></div>
                         <div class="replyDate">
-                            <span th:inline="text" class="replyModifyDate">[[${#temporals.format(boardReply.modifyDate, 'yyyy-MM-dd HH:mm:ss')}]]</span>
+                            <span th:inline="text" class="replyModifyDate">[[${#temporals.format(boardReply.modifyDate, 'yyyy-MM-dd HH:mm')}]]</span>
                             <a th:if="${#strings.equals(boardReply.member.memId, loginUser)}"
                                href="javascript:void(0);" onclick="replyRemove(this);" class="replyRemove">삭제</a>
                             <a th:if="${#strings.equals(boardReply.member.memId, loginUser)}"

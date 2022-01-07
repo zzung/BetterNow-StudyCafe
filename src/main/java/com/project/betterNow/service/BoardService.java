@@ -61,7 +61,7 @@ public class BoardService {
         return boardDto;
     }
 
-    // 게시글 저장 or 수정
+    // 게시글 저장
     @Transactional
     public Long savePost(BoardDto boardDto, String memId) {
         Member member = memberRepository.findByMemId(memId).get();
@@ -73,6 +73,12 @@ public class BoardService {
     @Transactional
     public int addViewCount(Long boardNum, int boardViews) {
         return boardRepository.addViewCount(boardNum, boardViews);
+    }
+
+    // 게시글 수정
+    @Transactional
+    public int updateBoard(Long boardNum, String boardTitle, String boardContent) {
+        return boardRepository.updateBoard(boardNum, boardTitle, boardContent);
     }
 
     // 게시글 삭제

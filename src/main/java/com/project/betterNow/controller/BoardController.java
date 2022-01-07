@@ -116,10 +116,21 @@ public class BoardController {
     }
 
     @ApiOperation("게시글 수정")
-    @PutMapping(value = "/board/edit/{boardNum}")
-    public String boardEdit(BoardDto boardDto, String memId) {
-        boardService.savePost(boardDto, memId);
-        return "redirect:/board/" + boardDto.getBoardNum();
+    @PostMapping(value = "/board/edit/{boardNum}")
+    public String boardEdit(@PathVariable Long boardNum, BoardDto boardDto, String memId) {
+
+        // 로그인 사용자
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDetails userDetails = (UserDetails) principal;
+        String loginUser = userDetails.getUsername();
+
+        if(loginUser.equals(memId)) {
+            if(boardService.updateBoard(boardNum, boardDto.getBoardTitle(), boardDto.getBoardContent()) > 0){
+                return "redirect:/board/" + boardDto.getBoardNum();
+            }
+        }
+
+        return "redirect:/board";
     }
 
     @ApiOperation("게시글 삭제 - 게시글 상태:N")
