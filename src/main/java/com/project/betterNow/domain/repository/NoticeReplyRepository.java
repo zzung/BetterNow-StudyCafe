@@ -19,4 +19,8 @@ public interface NoticeReplyRepository extends JpaRepository<NoticeReply, Long> 
     @Modifying(clearAutomatically = true)
     @Query("UPDATE NoticeReply n SET n.noReplyYn = 'N' WHERE n.noReplyNum = :noReplyNum")
     int deleteNoticeReply(Long noReplyNum);
+
+    @Modifying(clearAutomatically = true)
+    @Query("UPDATE NoticeReply n SET n.noReplyContent = :noReplyContent WHERE n.noReplyNum = :noReplyNum and n.notice.noticeNum = :noticeNum")
+    int updateNoticeReply(Long noReplyNum, Long noticeNum, String noReplyContent);
 }

@@ -26,11 +26,8 @@
             </div>
             <div class="row gx-4 gx-lg-5 justify-content-center mb-5 summernoteArea">
                 <!-- 게시글 수정 Form -->
-                <form th:action="@{'/notice/edit/' + ${noticeDto.noticeNum}}" th:object="${noticeDto}" method="post" id="noticeForm">
-                    <input type="hidden" name="_method" value="put"/>
+                <form th:object="${noticeDto}" method="post" onsubmit="return editNotice(this);" id="noticeForm">
                     <input type="hidden" th:name="memId" th:value="${noticeDto.admin.adminId}">
-                    <input type="hidden" th:name="createDate" th:value="${noticeDto.createDate}">
-                    <input type="hidden" th:name="noticeViews" th:value="${noticeDto.noticeViews}">
                     <input th:field="*{noticeTitle}" type="text" class="form-control" id="noticeTitle" name="noticeTitle" placeholder="제목을 입력해주세요" maxlength="100" required>
                     <div class="form-group">
                         <textarea th:field="*{noticeContent}" class="form-control summernote" id="noticeContent" name="noticeContent"></textarea>
@@ -96,6 +93,21 @@
                     console.log("통신 실패");
                 }
             });
+        }
+        // 수정 클릭시
+        function editNotice(form) {
+            let noticeNum = document.getElementById('noticeNum').value;
+
+            if (confirm('게시글을 수정 하시겠습니까?')){
+                form.action = '/notice/edit/'+noticeNum;
+                form.submit();
+                alert('성공적으로 수정 되었습니다. :)');
+                return true;
+            }else {
+                return false;
+            }
+
+            console.log(form.action);
         }
     </script>
 </section>

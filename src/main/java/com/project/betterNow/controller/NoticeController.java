@@ -74,9 +74,19 @@ public class NoticeController {
     }
 
     @ApiOperation("공지사항 수정")
-    @PutMapping(value = "/notice/edit/{noticeNum}")
-    public String noticeEdit(NoticeDto noticeDto, String adminId) {
-        noticeService.savePost(noticeDto, adminId);
+    @PostMapping(value = "/notice/edit/{noticeNum}")
+    public String noticeEdit(@PathVariable Long noticeNum, NoticeDto noticeDto, String adminId) {
+
+        // 로그인 사용자
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDetails userDetails = (UserDetails) principal;
+        String loginUser = userDetails.getUsername();
+
+        if(loginUser.equals(adminId)) {
+            if(noticeService.updateNotice(noticeNum, noticeDto.getNoticeTitle(), noticeDto.getNoticeContent()) > 0){
+                return "redirect:/notice/" + noticeDto.getNoticeNum();
+            }
+        }
         return "redirect:/notice/" + noticeDto.getNoticeNum();
     }
 

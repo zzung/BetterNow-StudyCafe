@@ -25,16 +25,16 @@
         <hr class="divider" />
       </div>
       <div class="row gx-4 gx-lg-5 justify-content-center mb-5 summernoteArea">
-        <!-- 게시글 수정 Form -->
-        <form th:action="@{'/board/edit/' + ${boardDto.boardNum}}" th:object="${boardDto}" method="post" id="boardForm">
+          <form th:object="${boardDto}" method="post" action="" onsubmit="return editBoard(this);" id="boardForm">
           <input type="hidden" th:name="memId" th:value="${boardDto.member.memId}">
+          <input type="hidden" name="boardNum" id="boardNum" th:value="${boardDto.boardNum}">
           <input th:field="*{boardTitle}" type="text" class="form-control" id="boardTitle" name="boardTitle" placeholder="제목을 입력해주세요" maxlength="100" required>
             <div class="form-group">
               <textarea th:field="*{boardContent}" class="form-control summernote" id="boardContent" name="boardContent"></textarea>
             </div>
             <div class="writeBoardBtns">
               <button class="btn btn-secondary" id="undoBtn" type="reset">뒤로가기</button>
-              <button class="btn btn-primary" id="editBtn" type="submit">수정하기</button>
+              <button class="btn btn-primary" id="editBtn" type="">수정하기</button>
             </div>
         </form>
         <script>
@@ -70,9 +70,7 @@
     </div>
   </div>
   <script>
-    /**
-     * 이미지 파일 업로드
-     */
+    // summer note 이미지 업로드
     function sendFile(file, editor) {
       let data = new FormData();
       data.append("file", file);
@@ -93,6 +91,22 @@
           console.log("통신 실패");
         }
       });
+    }
+
+    // 수정 클릭시
+    function editBoard(form) {
+      let boardNum = document.getElementById('boardNum').value;
+
+      if (confirm('게시글을 수정 하시겠습니까?')){
+        form.action = '/board/edit/'+boardNum;
+        form.submit();
+        alert('성공적으로 수정 되었습니다. :)');
+        return true;
+      }else {
+        return false;
+      }
+
+      console.log(form.action);
     }
   </script>
 </section>

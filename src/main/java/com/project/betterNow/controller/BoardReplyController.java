@@ -17,7 +17,7 @@ public class BoardReplyController {
     private final BoardReplyService boardReplyService;
 
     @ApiOperation("게시글 댓글 작성 ajax")
-    @PostMapping("/board/reply/write")
+    @RequestMapping(value = "/board/reply/write")
     @ResponseBody
     public String boardReplyWrite(@RequestParam Map<String, Object> param){
 

@@ -68,4 +68,9 @@ public class NoticeReplyService {
         return noticeReplyRepository.deleteNoticeReply(noReplyNum);
     }
 
+    // 댓글 수정
+    @Transactional
+    public int updateNoticeReply(Long noReplyNum, Long noticeNum, String noReplyContent) {
+        return noticeReplyRepository.updateNoticeReply(noReplyNum, noticeNum, noReplyContent);
+    }
 }

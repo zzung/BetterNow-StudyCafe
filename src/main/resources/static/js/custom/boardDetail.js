@@ -33,30 +33,33 @@
         let boardNum = document.getElementById('boardNum').value;
 
         if(boReplyContent.length<2) {
-            alert('댓글 내용을 작성해주세요!');
+            alert('댓글 내용을 한 글자 이상 작성해주세요!');
             document.getElementById('boReplyContent').focus();
         }else {
-            $.ajax({
-                url: "/board/reply/write",
-                type: "POST",
-                data: {
-                    'loginUserId' : loginUserId,
-                    'boReplyContent' : boReplyContent,
-                    'boardNum' : boardNum
-                },
-                success: function (result) {
-                    if(result == "success"){ // 댓글 저장 성공
-                        alert("댓글이 등록되었습니다 :)");
-                        location.href = '/board/' + boardNum;
+            if(confirm('댓글을 작성하시겠습니까?')){
+                $.ajax({
+                    url: "/board/reply/write",
+                    type: "POST",
+                    data: {
+                        'loginUserId' : loginUserId,
+                        'boReplyContent' : boReplyContent,
+                        'boardNum' : boardNum
+                    },
+                    success: function (result) {
+                        if(result == "success"){ // 댓글 저장 성공
+                            alert("댓글이 등록되었습니다 :)");
+                            location.href = 'redirect:/board/' + boardNum;
+                        }
+                        if(result == "") { // 댓글 저장 실패
+                            alert("댓글 등록 오류 ! 다시 시도해주세요.");
+                            location.href = '/board';
+                        }
+                    },error: function(request,status,error){
+                        console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
                     }
-                    if(result == "") { // 댓글 저장 실패
-                        alert("댓글 등록 오류 ! 다시 시도해주세요.");
-                        location.href = '/board';
-                   }
-                },error: function(request,status,error){
-                    console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-                }
-            });
+                });
+            }
+
         }
     }
 

@@ -1,3 +1,4 @@
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <th:block th:replace="/layout/header" />
     <th:block th:replace="/layout/navbar" />
@@ -45,7 +46,9 @@
                 <div class="row gx-4 gx-lg-5 mb-5 replyList">
                     <!-- 댓글 없을 때 -->
                     <h6 th:if="${noticeReplyList.isEmpty()}" class="replyEmptyInfo" style="text-align: center;">
-                        <hr>댓글이 없습니다. 첫 댓글을 작성해보세요 :)
+                        <hr>
+                        <span sec:authorize="isAuthenticated()">댓글이 없습니다.&nbsp;&nbsp;첫 댓글을 작성해보세요!&nbsp;&nbsp;:)</span>
+                        <span sec:authorize="isAnonymous()">댓글이 없습니다.&nbsp;&nbsp;댓글 기능은 로그인 후 이용 가능 합니다.&nbsp;&nbsp;:-> </span>
                     </h6>
 
                     <!-- 댓글 목록 -->
@@ -55,13 +58,14 @@
                         <div class="replyImg"><img src="" width="50" height="50"></div>
                         <div class="replyWriter" name="noReplyMember" th:text="${noticeReply.member.memId}"></div>
                         <div class="replyDate">
-                            <span th:inline="text">[[${#temporals.format(noticeReply.modifyDate, 'yyyy-MM-dd HH:mm')}]]</span>
+                            <span th:inline="text" class="replyModifyDate">[[${#temporals.format(noticeReply.modifyDate, 'yyyy-MM-dd HH:mm')}]]</span>
                             <a th:if="${#strings.equals(noticeReply.member.memId, loginUser)}"
                                href="javascript:void(0);" onclick="replyRemove(this);" class="replyRemove">삭제</a>
                             <a th:if="${#strings.equals(noticeReply.member.memId, loginUser)}"
                                href="javascript:void(0)" onclick="replyEdit(this);" class="replyEdit">수정</a>
                         </div>
-                        <div class="replyContent" th:text="${noticeReply.noReplyContent}"></div>
+                        <div class="replyContent" name="noReplyContent" th:text="${noticeReply.noReplyContent}"></div>
+                        <div name="originalReplyContent" style="display: none"></div>
                     </div>
 
                     <!-- 댓글 더보기 -->

@@ -76,6 +76,13 @@ public class NoticeService {
         return noticeRepository.addViewCount(noticeNum,noticeViews);
     }
 
+    // 공지사항 수정
+    @Transactional
+    public int updateNotice(Long noticeNum, String noticeTitle, String noticeContent) {
+        return noticeRepository.updateNotice(noticeNum, noticeTitle, noticeContent);
+    }
+
+
     // 공지사항 삭제
     @Transactional
     public int deletePost(Long noticeNum) {
