@@ -6,6 +6,8 @@ import com.project.betterNow.service.MemberService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,11 +25,15 @@ public class MypageController {
 
     @ApiOperation("마이페이지")
     @GetMapping("/mypage")
-    public String mypage(HttpSession session, Model model) {
-        MemberDto loginUser = (MemberDto)session.getAttribute("loginUser");
-        model.addAttribute("memId", loginUser.getMemId());
+    public String mypage() {
+
+        // 로그인 사용자
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDetails userDetails = (UserDetails) principal;
+        String loginUser = userDetails.getUsername();
 
         // 내 정보, 내가 쓴 글 목록 조회하기
+
 
         return "member/mypage";
     }

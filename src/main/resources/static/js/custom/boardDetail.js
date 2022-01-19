@@ -177,99 +177,85 @@
         }
     }
 
-
-    // 댓글 더보기 기능
-    // https://blog.naver.com/PostView.nhn?blogId=deeperain&logNo=221459867105
-    // https://nahosung.tistory.com/62
-    // https://stothey0804.github.io/project/moreBtn/
+    // 댓글 리스트 + 댓글 더보기
     window.onload = function () {
-                // 댓글 총 갯수
-                // var replyTotalCnt = '${replyTotalCnt}';
-                let replyTotalCnt = document.getElementsByClassName("replyEntity").length;
-                console.log(replyTotalCnt);
+        let boardNum = document.getElementById("boardNum").value;
+        let startIndex = 1; // 인덱스 초기값
+        let searchStep = 5; // 5개씩 로딩
 
-                // 조회 인덱스
-                let startIndex = 1;	// 인덱스 초기값
-                let searchStep = 5;	// 5개씩 로딩
+        // 페이지 로딩시 첫 실행
+        readMoreReplyList(startIndex);
 
-                // 페이지 로딩 시 첫 실행
-                readMoreReply(startIndex);
+        // 더보기 클릭시
+        $('#readMoreReplyList').click(function(){
+            startIndex += searchStep;
+            readMoreReplyList(startIndex);
+        });
 
-                // 더보기 클릭시
-                // function moreViewBtn() {
-                //     startIndex += searchStep;
-                //     readMoreReply(startIndex);
-                // }
-
-
-                // 더보기 실행함수 **
-                function readMoreReply(index){
-                    let endIndex = index+searchStep-1;	// endIndex설정
-                    $.ajax({
-                        type: "post",
-                        async: "true",
-                        dataType: "json",
-                        data: {
-                            m_id: '${m_id}',
-                            startIndex: index,
-                            endIndex: endIndex
-                        },
-                        url: "", // 주소 수정하기
-                        success: function (data, textStatus) {
-                            let NodeList = "";
-                            for(i = 0; i <data.length; i++){
-                                NodeList += '<div class="replyEntity">'+
-                                    '<hr>'+
-                                    '<div class="replyImg"><img src="" width="50" height="50"></div>'+
-                                    '<div class="replyWriter">'+ 작성자 + '</div>'+
-                                    '<div class="replyDate">' + 날짜 + '</div>'+
-                                    '<a href="" class="replyRemove">삭제</a>' +
-                                    '<a href="" class="replyEdit">수정</a> ' +
-                                    '<div class="replyContent">' + 댓글내용 + '</div>'+
-                                    '</div>';
-                            }
-                            $(NodeList).appendTo($("#replyList")).slideDown();
-
-                            // 더보기 버튼 삭제
-                            if(startIndex + searchStep > replyTotalCnt){
-                                $('#moreViewArea').remove();
-                            }
-                        }
-                    });
-                }
-};
-
-function moreContent(id, cnt) {
-
-    $('#startCount').val(list_length);
-    $('#viewCount').val(cnt);
-
-    $.ajax({
-        type: "post",
-        url: "",
-        data: $('#moreViewReply').serialize(),
-        dataType: "json",
-        success: function(result) {
-            console.log(result);
-            let moreReply = "";
-            for(let i=0; i<result.hashMapList.length; i++) {
-                moreReply +=
-                    '<div>'+
-                    '<hr>'+
-                    '<div class="replyImg"><img src="" width="50" height="50"></div>'+
-                    '<div class="replyWriter">'+ 작성자 + '</div>'+
-                    '<div class="replyDate">' + 날짜 + '</div>'+
-                    '<a href="" class="replyRemove">삭제</a>' +
-                    '<a href="" class="replyEdit">수정</a> ' +
-                    '<div class="replyContent">' + 댓글내용 + '</div>'+
-                    '</div>';
+        // 더보기 실행 함수
+        function readMoreReplyList(index) {
+            let loginUser = $('#loginUserId').val();
+            let replyCnt = $('#boardReplyCount').text();
+            let endIndex = 0;
+            if ((index + searchStep - 1) < replyCnt) {
+                endIndex = index + searchStep -1;
             }
-            moreReply += '<div class="moreView text-center" id="moreView">' +
-                '<hr><a href="more_btn" id="javascript:moreContent("more_list",5);">댓글 더보기</a><hr></div>';
-            $('')
-        }, error: function(error) {
-            console.log(error);
-        }
-    });
+            else {
+                endIndex = replyCnt;
+            }
 
-}
+            $.ajax({
+                url: "/board/reply/moreView/" + boardNum,
+                type: "POST",
+                dataType: "json",
+                data: { boardNum, boardNum },
+                success: function (replyList) {
+
+                    let moreReply = "";
+                    let i = startIndex-1;
+                    for (i; i < endIndex; i++) {
+                        moreReply += '<div class=\"replyEntity\">';
+                        moreReply += '<input type=\"hidden\" name=\"boReplyNum\" value='+ replyList[i].boReplyNum +'>';
+                        moreReply += '<hr>';
+                        moreReply += '<div class=\"replyImg\"><img src=\"\" width=\"50\" height=\"50\"></div>';
+                        moreReply += '<div class=\"replyWriter\" name=\"boReplyMember\">'+ replyList[i].member.memId +'</div>';
+                        moreReply += '<div class=\"replyDate\">';
+                        moreReply += '<span class=\"replyModifyDate\">'+ dateFormat(replyList[i].modifyDate) +'</span>';
+
+                        if(loginUser == replyList[i].member.memId) {
+                            moreReply += '<a href=\"javascript:void(0);\" onclick=\"replyRemove(this);\" class=\"replyRemove\">삭제</a>';
+                            moreReply += '<a href=\"javascript:void(0);\" onclick=\"replyEdit(this);\" class=\"replyEdit\">수정</a>';
+                        }
+                        moreReply += '</div>';
+                        moreReply += '<div class=\"replyContent\" name=\"boReplyContent\">'+ replyList[i].boReplyContent +'</div>';
+                        moreReply += '<div name=\"originalReplyContent\" style=\"display: none\">'+ replyList[i].boReplyContent +'</div>';
+                        moreReply += '</div>';
+
+                        console.log(replyList[i].modifyDate);
+                    }
+                    $('#replyZone').append(moreReply);
+
+                    if(startIndex + searchStep -1 > replyCnt) {
+                        $('#moreViewArea').remove();
+                    }
+
+                }, error: function (request, status, error) {
+                    console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+                }
+            });
+        }
+    };
+
+
+    function dateFormat(obj) {
+        // let d = new Date(obj);
+        // return d.getFullYear() + "-" + ((d.getMonth() + 1) > 9 ? (d.getMonth() + 1).toString() : "0" + (d.getMonth() + 1)) + "-" + (d.getDate() > 9 ? d.getDate().toString() : "0" + d.getDate().toString());
+        console.log(obj);
+        console.log(obj.date.year);
+        console.log(obj.date.month);
+        console.log(obj.date.day);
+
+        return obj.date.year +"-"+ (obj.date.month) > 9 ? obj.date.month : "0"+(obj.date.month) +"-"+ (obj.date.day) > 9 ? (obj.date.day) : "0"+(obj.date.day);
+    }
+
+

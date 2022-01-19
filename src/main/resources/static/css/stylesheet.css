@@ -11445,16 +11445,20 @@ header.masthead h1, header.masthead .h1 {
     width: 70%;
     margin-bottom: 30px;
 }
+.replyInputZone {
+    width: 75%;
+    height: 80px;
+    margin-top: 20px;
+    margin-bottom: -100px;
+}
 .replyZone {
     width: 75%;
     height: 100px;
-    margin-top: 20px;
     margin-bottom: -20px;
 }
 .inputReply {
     width: 85%;
     height: 100px;
-    /*float: left;*/
     font-size: small;
     margin-left: 20px;
 }

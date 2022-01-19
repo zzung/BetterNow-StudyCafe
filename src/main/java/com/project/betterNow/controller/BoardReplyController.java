@@ -1,5 +1,8 @@
 package com.project.betterNow.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.project.betterNow.domain.entity.BoardReply;
+import com.project.betterNow.dto.model.BoardReplyDto;
 import com.project.betterNow.service.BoardReplyService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -7,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RequiredArgsConstructor
@@ -58,6 +63,17 @@ public class BoardReplyController {
             result++;
         }
         return result;
+    }
+
+    @ApiOperation("게시글 댓글 더보기 ajax")
+    @RequestMapping(value = "/board/reply/moreView/{boardNum}", method = RequestMethod.POST)
+    @ResponseBody
+    public List<BoardReplyDto> moreviewBoardreply(@RequestParam Map<String, Object> param){
+
+        Long boardNum = Long.valueOf(String.valueOf(param.get("boardNum")));
+        List<BoardReplyDto> addList = boardReplyService.getBoardReplyList(boardNum);
+
+        return addList;
     }
 
 

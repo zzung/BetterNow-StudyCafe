@@ -36,9 +36,9 @@
                 </div>
 
                 <!-- 댓글 영역 -->
-                <h4 style="width: 70%; margin-bottom: 10px">댓글 <span th:text="${boardReplyCount}"></span> 개</h4>
-                <form th:if="${not #strings.isEmpty(loginUser)}" id="writeReplyForm" class="justify-content-center row gx-4 gx-lg-5 mb-5">
-                    <div class="row gx-4 gx-lg-5 mb-5 justify-content-center replyZone">
+                <h4 style="width: 70%; margin-bottom: 10px">댓글 <span th:text="${boardReplyCount}" id="boardReplyCount"></span> 개</h4>
+                <form th:if="${not #strings.isEmpty(loginUser)}" id="writeReplyForm" class="justify-content-center row gx-4 gx-lg-5 mb-5 replyInputZone">
+                    <div class="row gx-4 gx-lg-5 mb-5 justify-content-center ">
                         <input type="hidden" th:name="loginUserId" th:value="${loginUser}" id="loginUserId">
                         <textarea class="form-control inputReply" th:name="boReplyContent" id="boReplyContent" placeholder="댓글을 입력해주세요 (500자 까지 작성 가능)" maxlength="500" style="resize: none;"></textarea>
                         <button class="btn btn-primary saveReply float-right" onclick="saveReplyBtn();">작성</button>
@@ -53,25 +53,11 @@
                     </h6>
 
                     <!-- 댓글 목록 -->
-                    <div class="replyEntity" th:each="boardReply : ${boardReplyList}">
-                        <input type="hidden" name="boReplyNum" th:value="${boardReply.boReplyNum}">
-                        <hr>
-                        <div class="replyImg"><img src="" width="50" height="50"></div>
-                        <div class="replyWriter" name="boReplyMember" th:text="${boardReply.member.memId}"></div>
-                        <div class="replyDate">
-                            <span th:inline="text" class="replyModifyDate">[[${#temporals.format(boardReply.modifyDate, 'yyyy-MM-dd HH:mm')}]]</span>
-                            <a th:if="${#strings.equals(boardReply.member.memId, loginUser)}"
-                               href="javascript:void(0);" onclick="replyRemove(this);" class="replyRemove">삭제</a>
-                            <a th:if="${#strings.equals(boardReply.member.memId, loginUser)}"
-                               href="javascript:void(0)" onclick="replyEdit(this);" class="replyEdit">수정</a>
-                        </div>
-                        <div class="replyContent" name="boReplyContent" th:text="${boardReply.boReplyContent}"></div>
-                        <div name="originalReplyContent" style="display: none"></div>
-                    </div>
+                    <div id="replyZone"></div>
 
                     <!-- 댓글 더보기 -->
-                    <div th:if="not ${boardReplyList.isEmpty()}" class="moreView text-center" id="moreViewArea">
-                        <hr><a href="javascript:void(0);" onclick="moreViewBtn();">댓글 더보기</a>
+                    <div th:if="${boardReplyCount} > 5" class="moreView text-center" id="moreViewArea">
+                        <hr><a href="javascript:void(0);" id="readMoreReplyList">댓글 더보기</a>
                     </div>
 
                 </div>
