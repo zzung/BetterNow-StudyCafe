@@ -17,3 +17,17 @@ git clone git@github.com:zzung/BetterNow-StudyCafe.git
 #using the GitHub CLI
 gh repo clone whitep4nth3r/nextjs-contentful-blog-starter
 ```
+<br>
+
+## Preview
+1. 멤버쉽 결제 서비스 예시입니다.
+<img width="900" alt="스크린샷 2022-02-10 오후 2 37 02" src="https://user-images.githubusercontent.com/56067742/153344416-0f52dcc4-6fe4-4332-8bac-4f516e76680e.png">
+<br>
+2. 게시글, 댓글 서비스 예시입니다.
+<img width="1000" alt="스크린샷 2022-02-10 오후 2 36 25" src="https://user-images.githubusercontent.com/56067742/153344412-669a9762-8562-4b04-851b-ed94d69949d5.png">
+<br>
+<img width="700" alt="스크린샷 2022-02-10 오후 2 41 09" src="https://user-images.githubusercontent.com/56067742/153344808-b83d5f1c-3cbd-4092-8d43-98ef85d08c8f.png">
+<br>
+
+## License
+MIT License
