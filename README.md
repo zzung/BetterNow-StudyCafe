@@ -12,7 +12,7 @@
 본인 GitHub 계정에 이 repository를 Fork 하거나 본인 로컬에 clone 해서 사용가능 합니다. <br>
 ```
 #using git
-git clone git@github.com:whitep4nth3r/nextjs-contentful-blog-starter.git
+git clone git@github.com:zzung/BetterNow-StudyCafe.git
 
 #using the GitHub CLI
 gh repo clone whitep4nth3r/nextjs-contentful-blog-starter
