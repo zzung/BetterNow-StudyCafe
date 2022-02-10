@@ -7,4 +7,4 @@
 불편한 점은 관리자에게 채팅을 통해 건의 할 수 있습니다. :) <br><br>
 
 ## Getting set up
-![This is an image](https://myoctocat.com/assets/images/base-octocat.svg)
+
