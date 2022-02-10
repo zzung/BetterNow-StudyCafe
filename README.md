@@ -21,14 +21,23 @@ gh repo clone whitep4nth3r/nextjs-contentful-blog-starter
 <br>
 
 ## Preview
-멤버쉽 결제 서비스와 게시글 및 댓글 서비스 예시 입니다.
+1. 멤버쉽 결제 페이지 입니다.
 <img width="900" alt="스크린샷 2022-02-10 오후 2 37 02" src="https://user-images.githubusercontent.com/56067742/153344416-0f52dcc4-6fe4-4332-8bac-4f516e76680e.png">
-***
-<br>
-<img width="1000" alt="스크린샷 2022-02-10 오후 2 36 25" src="https://user-images.githubusercontent.com/56067742/153344412-669a9762-8562-4b04-851b-ed94d69949d5.png">
 
 ***
-<br><br>
+2. 좌석 선택 및 결제 페이지 예시입니다.
+<br>
+<img width="1043" alt="스크린샷 2022-02-10 오후 9 37 38" src="https://user-images.githubusercontent.com/56067742/153410359-9b8d1c72-1058-4f5c-90c2-6296741fc53d.png">
+<br>
+<img width="1037" alt="스크린샷 2022-02-10 오후 9 38 06" src="https://user-images.githubusercontent.com/56067742/153410365-3c2eaf60-68b2-4b5c-b239-318c1893ecdd.png">
+
+
+
+***
+3. 게시글 및 댓글 페이지 예시입니다.
+<br>
+<img width="1000" alt="스크린샷 2022-02-10 오후 2 36 25" src="https://user-images.githubusercontent.com/56067742/153344412-669a9762-8562-4b04-851b-ed94d69949d5.png">
+<br>
 <img width="700" alt="스크린샷 2022-02-10 오후 2 41 09" src="https://user-images.githubusercontent.com/56067742/153344808-b83d5f1c-3cbd-4092-8d43-98ef85d08c8f.png">
 
 <br>
