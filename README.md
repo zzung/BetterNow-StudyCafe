@@ -45,7 +45,7 @@ gh repo clone whitep4nth3r/nextjs-contentful-blog-starter
 * Java, Spring Boot, Gradle, Maven
 * JPA, Hibernate, QueryDsl, MySQL
 * JavaScript, Thymeleaf
-* Git, GitHub
+* Git, GitHub, IntelliJ
 <br>
 
 ## Template
