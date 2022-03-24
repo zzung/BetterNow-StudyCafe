@@ -251,7 +251,7 @@
         // let d = new Date(obj);
         // return d.getFullYear() + "-" + ((d.getMonth() + 1) > 9 ? (d.getMonth() + 1).toString() : "0" + (d.getMonth() + 1)) + "-" + (d.getDate() > 9 ? d.getDate().toString() : "0" + d.getDate().toString());
         console.log(obj);
-        console.log(obj.date.year);
+        console.log(typeof obj.date.year);
         console.log(obj.date.month);
         console.log(obj.date.day);
 
